@@ -102,7 +102,7 @@ public class Fabrishot {
         Path file;
 
         do {
-            file = dir.resolve(String.format("huge_%s_%04d.tga", DATE_FORMAT.format(new Date()), i++));
+            file = dir.resolve(String.format("huge_%s_%04d.png", DATE_FORMAT.format(new Date()), i++));
         } while (Files.exists(file));
 
         return file;

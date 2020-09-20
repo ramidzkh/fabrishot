@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "me.ramidzkh"
-version = "1.0.0-SNAPSHOT"
+version = "1.1.0-SNAPSHOT"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8

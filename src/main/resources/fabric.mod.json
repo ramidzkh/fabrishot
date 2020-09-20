@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "fabrishot",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "environment": "client",
   "mixins": [
     "mixins.fabrishot.json"
@@ -15,7 +15,7 @@
     ]
   },
   "name": "Fabrishot",
-  "description": "Take 15360x8640 screenshots because why not",
+  "description": "Take high resolution screenshots because why not",
   "depends": {
     "fabric": ">=0.19.0"
   },

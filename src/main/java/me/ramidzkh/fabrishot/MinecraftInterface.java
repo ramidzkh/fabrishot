@@ -56,33 +56,28 @@ public interface MinecraftInterface {
         return CLIENT.getWindow().getHeight();
     }
 
-    static void writeFramebuffer(ByteBuffer pixelBuffer, boolean flipColors, boolean flipLines) {
-        GL11.glReadPixels(0, 0, getDisplayWidth(), getDisplayHeight(), flipColors ? GL12.GL_BGR : GL11.GL_RGB, GL11.GL_UNSIGNED_BYTE, pixelBuffer);
+    static void writeFramebuffer(ByteBuffer pb, int bpp, boolean flip) {
+        GL11.glReadPixels(0, 0, getDisplayWidth(), getDisplayHeight(), GL11.GL_RGB, GL11.GL_UNSIGNED_BYTE, pb);
 
-        if (!flipLines) {
-            return;
-        }
-
-        final int BPP = 3; // bytes per pixel
-        byte[] line1 = new byte[getDisplayWidth() * BPP];
-        byte[] line2 = new byte[getDisplayWidth() * BPP];
+        byte[] line1 = new byte[getDisplayWidth() * bpp];
+        byte[] line2 = new byte[getDisplayWidth() * bpp];
 
         // flip buffer vertically
         for (int i = 0; i < getDisplayHeight() / 2; i++) {
-            int ofs1 = i * getDisplayWidth() * BPP;
-            int ofs2 = (getDisplayHeight() - i - 1) * getDisplayWidth() * BPP;
+            int ofs1 = i * getDisplayWidth() * bpp;
+            int ofs2 = (getDisplayHeight() - i - 1) * getDisplayWidth() * bpp;
 
             // read lines
-            pixelBuffer.position(ofs1);
-            pixelBuffer.get(line1);
-            pixelBuffer.position(ofs2);
-            pixelBuffer.get(line2);
+            pb.position(ofs1);
+            pb.get(line1);
+            pb.position(ofs2);
+            pb.get(line2);
 
             // write lines at swapped positions
-            pixelBuffer.position(ofs2);
-            pixelBuffer.put(line1);
-            pixelBuffer.position(ofs1);
-            pixelBuffer.put(line2);
+            pb.position(ofs2);
+            pb.put(line1);
+            pb.position(ofs1);
+            pb.put(line2);
         }
     }
 }

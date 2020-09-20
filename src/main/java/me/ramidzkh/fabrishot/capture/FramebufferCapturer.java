@@ -30,42 +30,27 @@ import org.lwjgl.opengl.GL11;
 import java.nio.ByteBuffer;
 
 public class FramebufferCapturer {
-
-    private static final int BPP = 3; // bytes per pixel
+    private static final int COMPONENT_COUNT = 3; // RGB
+    private static final int BYTES_PER_PIXEL = COMPONENT_COUNT; // 8 bits per component
 
     private final ByteBuffer bb;
     private final Dimension dim;
-    private boolean flipColors = false;
-    private boolean flipLines = false;
 
     public FramebufferCapturer() {
         dim = getCurrentDimension();
-        bb = ByteBuffer.allocateDirect(dim.width * dim.height * BPP);
-    }
-
-    public boolean isFlipColors() {
-        return flipColors;
-    }
-
-    public void setFlipColors(boolean flipColors) {
-        this.flipColors = flipColors;
-    }
-
-    public boolean isFlipLines() {
-        return flipLines;
-    }
-
-    public void setFlipLines(boolean flipLines) {
-        this.flipLines = flipLines;
+        bb = ByteBuffer.allocateDirect(dim.width * dim.height * BYTES_PER_PIXEL);
     }
 
     public int getBytesPerPixel() {
-        return BPP;
+        return BYTES_PER_PIXEL;
     }
 
-    public ByteBuffer getByteBuffer() {
-        bb.rewind();
-        return bb.duplicate();
+    public int getChannelCount() {
+        return COMPONENT_COUNT;
+    }
+
+    public ByteBuffer getDataBuffer() {
+        return bb;
     }
 
     public Dimension getCaptureDimension() {
@@ -76,7 +61,7 @@ public class FramebufferCapturer {
         return new Dimension(MinecraftInterface.getDisplayWidth(), MinecraftInterface.getDisplayHeight());
     }
 
-    public void capture() {
+    public void capture(boolean flip) {
         // check if the dimensions are still the same
         Dimension dim1 = getCurrentDimension();
         Dimension dim2 = getCaptureDimension();
@@ -91,6 +76,8 @@ public class FramebufferCapturer {
         GL11.glPixelStorei(GL11.GL_PACK_ALIGNMENT, 1);
         GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 1);
 
-        MinecraftInterface.writeFramebuffer(bb, flipColors, flipLines);
+        MinecraftInterface.writeFramebuffer(bb, BYTES_PER_PIXEL, flip);
+
+        bb.rewind();
     }
 }

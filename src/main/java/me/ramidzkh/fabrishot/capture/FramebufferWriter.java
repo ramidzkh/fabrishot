@@ -24,17 +24,18 @@
 
 package me.ramidzkh.fabrishot.capture;
 
+import org.lwjgl.stb.STBIWriteCallback;
+import org.lwjgl.stb.STBImageWrite;
+
+import java.io.Closeable;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;
+import java.nio.channels.WritableByteChannel;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
 public class FramebufferWriter {
-
-    protected static final int HEADER_SIZE = 18;
-
     protected final FramebufferCapturer fbc;
     protected final Path file;
 
@@ -44,27 +45,51 @@ public class FramebufferWriter {
     }
 
     public void write() throws IOException {
-        fbc.setFlipColors(true);
-        fbc.setFlipLines(false);
-        fbc.capture();
+        fbc.capture(true);
 
-        Dimension dim = fbc.getCaptureDimension();
         try (FileChannel fc = FileChannel.open(file, StandardOpenOption.CREATE, StandardOpenOption.WRITE)) {
-            fc.write(buildTargaHeader(dim.width, dim.height, fbc.getBytesPerPixel() * 8));
-            fc.write(fbc.getByteBuffer());
+            writeImage(fc);
         }
     }
 
-    protected ByteBuffer buildTargaHeader(int width, int height, int bpp) {
-        ByteBuffer bb = ByteBuffer.allocate(HEADER_SIZE);
-        bb.order(ByteOrder.LITTLE_ENDIAN);
-        bb.position(2);
-        bb.put((byte) 2); // image type - uncompressed true-color image
-        bb.position(12);
-        bb.putShort((short) (width & 0xffff));
-        bb.putShort((short) (height & 0xffff));
-        bb.put((byte) (bpp & 0xff)); // bits per pixel
-        bb.rewind();
-        return bb;
+    private void writeImage(FileChannel fc) throws IOException {
+        Dimension dim = fbc.getCaptureDimension();
+
+        try (WriteCallback callback = new WriteCallback(fc)) {
+            STBImageWrite.stbi_write_png_to_func(callback, 0L, dim.width, dim.height, fbc.getChannelCount(), fbc.getDataBuffer(), 0);
+
+            if (callback.exception != null) {
+                throw callback.exception;
+            }
+        }
+    }
+
+    private static class WriteCallback extends STBIWriteCallback implements AutoCloseable, Closeable {
+        private final WritableByteChannel channel;
+        private IOException exception;
+
+        private WriteCallback(WritableByteChannel channel) {
+            this.channel = channel;
+        }
+
+        @Override
+        public void invoke(long context, long data, int size) {
+            if (this.exception != null) {
+                return;
+            }
+
+            ByteBuffer buf = STBIWriteCallback.getData(data, size);
+
+            try {
+                this.channel.write(buf);
+            } catch (IOException e) {
+                this.exception = e;
+            }
+        }
+
+        @Override
+        public void close() {
+            this.free();
+        }
     }
 }

@@ -1,3 +1,7 @@
 {
+  "fabrishot.config.title": "Fabrishot",
+  "fabrishot.config.category": "Screenshot dimensions",
+  "fabrishot.config.width": "Screenshot width",
+  "fabrishot.config.height": "Screenshot height",
   "key.fabrishot.screenshot": "Take large screenshot"
 }

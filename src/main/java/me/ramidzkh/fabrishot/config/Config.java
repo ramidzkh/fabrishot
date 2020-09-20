@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-package me.ramidzkh.fabrishot;
+package me.ramidzkh.fabrishot.config;
 
-public class BadConfig {
+public class Config {
 
-    public static final int CAPTURE_WIDTH = 3840;
-    public static final int CAPTURE_HEIGHT = 2160;
+    public static int CAPTURE_WIDTH = 3840;
+    public static int CAPTURE_HEIGHT = 2160;
 }

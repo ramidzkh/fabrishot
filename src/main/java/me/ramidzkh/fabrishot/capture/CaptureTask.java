@@ -24,7 +24,7 @@
 
 package me.ramidzkh.fabrishot.capture;
 
-import me.ramidzkh.fabrishot.BadConfig;
+import me.ramidzkh.fabrishot.config.Config;
 import me.ramidzkh.fabrishot.MinecraftInterface;
 
 import java.nio.file.Path;
@@ -52,8 +52,8 @@ public class CaptureTask {
                 displayWidth = MinecraftInterface.getDisplayWidth();
                 displayHeight = MinecraftInterface.getDisplayHeight();
 
-                int width = BadConfig.CAPTURE_WIDTH;
-                int height = BadConfig.CAPTURE_HEIGHT;
+                int width = Config.CAPTURE_WIDTH;
+                int height = Config.CAPTURE_HEIGHT;
 
                 // resize viewport/framebuffer
                 MinecraftInterface.resize(width, height);

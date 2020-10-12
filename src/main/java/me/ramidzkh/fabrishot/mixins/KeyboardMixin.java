@@ -22,11 +22,32 @@
  * SOFTWARE.
  */
 
-package me.ramidzkh.fabrishot.config;
+package me.ramidzkh.fabrishot.mixins;
 
-public class Config {
+import me.ramidzkh.fabrishot.Fabrishot;
+import me.ramidzkh.fabrishot.config.Config;
+import net.minecraft.client.Keyboard;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.options.KeyBinding;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
-    public static boolean SWAP_WITH_SCREENSHOT_KEY = false;
-    public static int CAPTURE_WIDTH = 3840;
-    public static int CAPTURE_HEIGHT = 2160;
+@Mixin(Keyboard.class)
+public class KeyboardMixin {
+
+    @Shadow
+    @Final
+    private MinecraftClient client;
+
+    @Redirect(method = "onKey", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/options/KeyBinding;matchesKey(II)Z", ordinal = 1))
+    private boolean matchesKey(KeyBinding keyBinding, int keyCode, int scanCode) {
+        if (keyBinding == client.options.keyScreenshot && Config.SWAP_WITH_SCREENSHOT_KEY) {
+            return Fabrishot.SCREENSHOT_BINDING.wasPressed();
+        }
+
+        return keyBinding.matchesKey(keyCode, scanCode);
+    }
 }

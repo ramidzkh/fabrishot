@@ -30,6 +30,7 @@ import org.lwjgl.opengl.GL11;
 import java.nio.ByteBuffer;
 
 public class FramebufferCapturer {
+
     private static final int COMPONENT_COUNT = 3; // RGB
     private static final int BYTES_PER_PIXEL = COMPONENT_COUNT; // 8 bits per component
 
@@ -61,7 +62,7 @@ public class FramebufferCapturer {
         return new Dimension(MinecraftInterface.getDisplayWidth(), MinecraftInterface.getDisplayHeight());
     }
 
-    public void capture(boolean flip) {
+    public void capture() {
         // check if the dimensions are still the same
         Dimension dim1 = getCurrentDimension();
         Dimension dim2 = getCaptureDimension();
@@ -76,7 +77,7 @@ public class FramebufferCapturer {
         GL11.glPixelStorei(GL11.GL_PACK_ALIGNMENT, 1);
         GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 1);
 
-        MinecraftInterface.writeFramebuffer(bb, BYTES_PER_PIXEL, flip);
+        MinecraftInterface.writeFramebuffer(bb, BYTES_PER_PIXEL);
 
         bb.rewind();
     }

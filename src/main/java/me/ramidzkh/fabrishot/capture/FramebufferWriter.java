@@ -36,6 +36,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
 public class FramebufferWriter {
+
     protected final FramebufferCapturer fbc;
     protected final Path file;
 
@@ -45,7 +46,7 @@ public class FramebufferWriter {
     }
 
     public void write() throws IOException {
-        fbc.capture(true);
+        fbc.capture();
 
         try (FileChannel fc = FileChannel.open(file, StandardOpenOption.CREATE, StandardOpenOption.WRITE)) {
             writeImage(fc);

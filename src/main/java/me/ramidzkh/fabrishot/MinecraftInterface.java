@@ -27,7 +27,6 @@ package me.ramidzkh.fabrishot;
 import me.ramidzkh.fabrishot.mixins.WindowAccessor;
 import net.minecraft.client.MinecraftClient;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 import java.nio.ByteBuffer;
 
@@ -56,7 +55,7 @@ public interface MinecraftInterface {
         return CLIENT.getWindow().getHeight();
     }
 
-    static void writeFramebuffer(ByteBuffer pb, int bpp, boolean flip) {
+    static void writeFramebuffer(ByteBuffer pb, int bpp) {
         GL11.glReadPixels(0, 0, getDisplayWidth(), getDisplayHeight(), GL11.GL_RGB, GL11.GL_UNSIGNED_BYTE, pb);
 
         byte[] line1 = new byte[getDisplayWidth() * bpp];

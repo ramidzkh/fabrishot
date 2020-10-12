@@ -25,6 +25,7 @@
 package me.ramidzkh.fabrishot;
 
 import me.ramidzkh.fabrishot.capture.CaptureTask;
+import me.ramidzkh.fabrishot.config.Config;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
@@ -48,6 +49,12 @@ import java.util.Date;
 
 public class Fabrishot {
 
+    public static final KeyBinding SCREENSHOT_BINDING = new KeyBinding(
+            "key.fabrishot.screenshot",
+            InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_F9,
+            "key.categories.misc");
+
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss");
     private static CaptureTask task;
 
@@ -57,16 +64,10 @@ public class Fabrishot {
     }
 
     public static void initialize() {
-        KeyBinding screenshot = new KeyBinding(
-                "key.fabrishot.screenshot",
-                InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_F9,
-                "key.categories.misc");
-
-        KeyBindingHelper.registerKeyBinding(screenshot);
+        KeyBindingHelper.registerKeyBinding(SCREENSHOT_BINDING);
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (screenshot.wasPressed()) {
+            if ((Config.SWAP_WITH_SCREENSHOT_KEY ? client.options.keyScreenshot : SCREENSHOT_BINDING).wasPressed()) {
                 task = new CaptureTask(getScreenshotFile(client));
             }
         });

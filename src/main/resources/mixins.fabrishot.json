@@ -4,6 +4,7 @@
   "package": "me.ramidzkh.fabrishot.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "KeyboardMixin",
     "MinecraftClientMixin",
     "WindowAccessor"
   ],

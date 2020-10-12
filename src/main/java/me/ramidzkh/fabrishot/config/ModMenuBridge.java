@@ -36,16 +36,17 @@ public class ModMenuBridge implements ModMenuApi {
 
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        try (BufferedReader reader = Files.newBufferedReader(FabricLoader.getInstance().getConfigDir().resolve("fabrishot.properties"))) {
-            Properties properties = new Properties();
-            properties.load(reader);
-
-            Config.CAPTURE_WIDTH = Integer.parseInt(properties.getProperty("width"));
-            Config.CAPTURE_HEIGHT = Integer.parseInt(properties.getProperty("height"));
-        } catch (Exception ignored) {
-        }
-
         if (FabricLoader.getInstance().isModLoaded("cloth-config2")) {
+            try (BufferedReader reader = Files.newBufferedReader(FabricLoader.getInstance().getConfigDir().resolve("fabrishot.properties"))) {
+                Properties properties = new Properties();
+                properties.load(reader);
+
+                Config.SWAP_WITH_SCREENSHOT_KEY = Boolean.parseBoolean(properties.getProperty("swap_with_screenshot_key"));
+                Config.CAPTURE_WIDTH = Integer.parseInt(properties.getProperty("width"));
+                Config.CAPTURE_HEIGHT = Integer.parseInt(properties.getProperty("height"));
+            } catch (Exception ignored) {
+            }
+
             return new ClothConfigBridge();
         } else {
             return screen -> null;

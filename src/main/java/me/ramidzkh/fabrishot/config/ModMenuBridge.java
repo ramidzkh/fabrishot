@@ -41,7 +41,7 @@ public class ModMenuBridge implements ModMenuApi {
                 Properties properties = new Properties();
                 properties.load(reader);
 
-                Config.SWAP_WITH_SCREENSHOT_KEY = Boolean.parseBoolean(properties.getProperty("swap_with_screenshot_key"));
+                Config.OVERRIDE_SCREENSHOT_KEY = Boolean.parseBoolean(properties.getProperty("override_screenshot_key"));
                 Config.CAPTURE_WIDTH = Integer.parseInt(properties.getProperty("width"));
                 Config.CAPTURE_HEIGHT = Integer.parseInt(properties.getProperty("height"));
             } catch (Exception ignored) {

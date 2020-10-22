@@ -47,7 +47,7 @@ public class ClothConfigBridge implements ConfigScreenFactory<Screen> {
                 .setTitle(new TranslatableText("fabrishot.config.title"))
                 .setSavingRunnable(() -> {
                     Properties properties = new Properties();
-                    properties.put("swap_with_screenshot_key", String.valueOf(Config.SWAP_WITH_SCREENSHOT_KEY));
+                    properties.put("override_screenshot_key", String.valueOf(Config.OVERRIDE_SCREENSHOT_KEY));
                     properties.put("width", String.valueOf(Config.CAPTURE_WIDTH));
                     properties.put("height", String.valueOf(Config.CAPTURE_HEIGHT));
 
@@ -61,22 +61,22 @@ public class ClothConfigBridge implements ConfigScreenFactory<Screen> {
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
         ConfigCategory category = builder.getOrCreateCategory(new TranslatableText("fabrishot.config.category"));
 
-        category.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("fabrishot.config.swap_with_screenshot_key"), Config.SWAP_WITH_SCREENSHOT_KEY)
+        category.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("fabrishot.config.override_screenshot_key"), Config.OVERRIDE_SCREENSHOT_KEY)
                 .setDefaultValue(false)
-                .setSaveConsumer(b -> Config.SWAP_WITH_SCREENSHOT_KEY = b)
+                .setSaveConsumer(b -> Config.OVERRIDE_SCREENSHOT_KEY = b)
                 .build());
 
         category.addEntry(entryBuilder.startIntField(new TranslatableText("fabrishot.config.width"), Config.CAPTURE_WIDTH)
                 .setDefaultValue(3840)
                 .setMin(1)
-                .setMax(65536)
+                .setMax(65535)
                 .setSaveConsumer(i -> Config.CAPTURE_WIDTH = i)
                 .build());
 
         category.addEntry(entryBuilder.startIntField(new TranslatableText("fabrishot.config.height"), Config.CAPTURE_HEIGHT)
                 .setDefaultValue(2160)
                 .setMin(1)
-                .setMax(65536)
+                .setMax(65535)
                 .setSaveConsumer(i -> Config.CAPTURE_HEIGHT = i)
                 .build());
         return builder.build();

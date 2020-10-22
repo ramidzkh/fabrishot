@@ -25,8 +25,6 @@
 package me.ramidzkh.fabrishot;
 
 import me.ramidzkh.fabrishot.capture.CaptureTask;
-import me.ramidzkh.fabrishot.config.Config;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.options.KeyBinding;
@@ -58,19 +56,19 @@ public class Fabrishot {
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss");
     private static CaptureTask task;
 
-    public static void printFileLink(File file) {
+    private static void printFileLink(File file) {
         Text text = new LiteralText(file.getName()).formatted(Formatting.UNDERLINE).styled(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, file.getAbsolutePath())));
         MinecraftClient.getInstance().execute(() -> MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(new TranslatableText("screenshot.success", text)));
     }
 
     public static void initialize() {
         KeyBindingHelper.registerKeyBinding(SCREENSHOT_BINDING);
+    }
 
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if ((Config.SWAP_WITH_SCREENSHOT_KEY ? client.options.keyScreenshot : SCREENSHOT_BINDING).wasPressed()) {
-                task = new CaptureTask(getScreenshotFile(client));
-            }
-        });
+    public static void startCapture() {
+        if (task == null) {
+            task = new CaptureTask(getScreenshotFile(MinecraftClient.getInstance()));
+        }
     }
 
     public static void onRenderPreOrPost() {

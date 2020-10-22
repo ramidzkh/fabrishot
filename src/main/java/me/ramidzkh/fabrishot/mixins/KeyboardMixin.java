@@ -27,27 +27,27 @@ package me.ramidzkh.fabrishot.mixins;
 import me.ramidzkh.fabrishot.Fabrishot;
 import me.ramidzkh.fabrishot.config.Config;
 import net.minecraft.client.Keyboard;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.options.KeyBinding;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Keyboard.class)
 public class KeyboardMixin {
 
-    @Shadow
-    @Final
-    private MinecraftClient client;
-
-    @Redirect(method = "onKey", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/options/KeyBinding;matchesKey(II)Z", ordinal = 1))
-    private boolean matchesKey(KeyBinding keyBinding, int keyCode, int scanCode) {
-        if (keyBinding == client.options.keyScreenshot && Config.SWAP_WITH_SCREENSHOT_KEY) {
-            return Fabrishot.SCREENSHOT_BINDING.wasPressed();
+    @Inject(method = "onKey", at = @At(value = "FIELD", target = "Lnet/minecraft/client/options/GameOptions;keyScreenshot:Lnet/minecraft/client/options/KeyBinding;"))
+    private void preScreenshot(long window, int key, int scancode, int i, int j, CallbackInfo callbackInfo) {
+        // Injecting here allows us to work inside other menus
+        if (Fabrishot.SCREENSHOT_BINDING.matchesKey(key, scancode)) {
+            Fabrishot.startCapture();
         }
+    }
 
-        return keyBinding.matchesKey(keyCode, scanCode);
+    @Inject(method = "onKey", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/ScreenshotUtils;saveScreenshot(Ljava/io/File;IILnet/minecraft/client/gl/Framebuffer;Ljava/util/function/Consumer;)V"), cancellable = true)
+    private void onScreenshot(CallbackInfo callbackInfo) {
+        if (Config.OVERRIDE_SCREENSHOT_KEY) {
+            Fabrishot.startCapture();
+            callbackInfo.cancel();
+        }
     }
 }

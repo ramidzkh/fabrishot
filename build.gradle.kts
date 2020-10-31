@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "me.ramidzkh"
-version = "1.2.0-SNAPSHOT"
+version = "1.2.2-SNAPSHOT"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -20,4 +20,8 @@ dependencies {
     modImplementation("me.shedaniel.cloth:config-2:4.8.2") {
         exclude(group = "net.fabricmc.fabric-api")
     }
+}
+
+tasks.withType<JavaCompile> {
+    options.release.set(8)
 }

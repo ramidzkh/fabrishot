@@ -1,0 +1,8 @@
+{
+  "fabrishot.config.title": "Fabrishot",
+  "fabrishot.config.category": "Размеры скриншота",
+  "fabrishot.config.override_screenshot_key": "Замените обычный скриншот с Fabrishot",
+  "fabrishot.config.width": "Ширина скриншота",
+  "fabrishot.config.height": "Высота скриншота",
+  "key.fabrishot.screenshot": "Сделать большой скриншот"
+}

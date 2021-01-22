@@ -1,6 +1,7 @@
 {
   "fabrishot.config.title": "Fabrishot",
   "fabrishot.config.category": "Kuvatõmmise suurus",
+  "fabrishot.config.override_screenshot_key": "Tee tavalise kuvatõmmise asemel Fabrishoti kuvatõmmis",
   "fabrishot.config.width": "Kuvatõmmise laius",
   "fabrishot.config.height": "Kuvatõmmise kõrgus",
   "key.fabrishot.screenshot": "Loo suur kuvatõmmis"

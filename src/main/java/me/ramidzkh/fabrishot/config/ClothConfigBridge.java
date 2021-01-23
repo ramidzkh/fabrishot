@@ -52,7 +52,7 @@ public class ClothConfigBridge implements ConfigScreenFactory<Screen> {
                     properties.put("height", String.valueOf(Config.CAPTURE_HEIGHT));
 
                     try (BufferedWriter writer = Files.newBufferedWriter(FabricLoader.getInstance().getConfigDir().resolve("fabrishot.properties"))) {
-                        properties.store(writer, "Fabrishot");
+                        properties.store(writer, "Fabrishot screenshot config");
                     } catch (IOException exception) {
                         LogManager.getLogger(Fabrishot.class).error(exception.getMessage(), exception);
                     }

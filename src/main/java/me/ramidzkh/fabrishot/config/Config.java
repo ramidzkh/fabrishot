@@ -24,9 +24,27 @@
 
 package me.ramidzkh.fabrishot.config;
 
+import net.fabricmc.loader.api.FabricLoader;
+
+import java.io.BufferedReader;
+import java.nio.file.Files;
+import java.util.Properties;
+
 public class Config {
 
     public static boolean OVERRIDE_SCREENSHOT_KEY = false;
     public static int CAPTURE_WIDTH = 3840;
     public static int CAPTURE_HEIGHT = 2160;
+
+    static {
+        try (BufferedReader reader = Files.newBufferedReader(FabricLoader.getInstance().getConfigDir().resolve("fabrishot.properties"))) {
+            Properties properties = new Properties();
+            properties.load(reader);
+
+            Config.OVERRIDE_SCREENSHOT_KEY = Boolean.parseBoolean(properties.getProperty("override_screenshot_key"));
+            Config.CAPTURE_WIDTH = Integer.parseInt(properties.getProperty("width"));
+            Config.CAPTURE_HEIGHT = Integer.parseInt(properties.getProperty("height"));
+        } catch (Exception ignored) {
+        }
+    }
 }

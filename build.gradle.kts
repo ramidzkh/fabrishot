@@ -8,6 +8,11 @@ version = "1.2.2"
 
 repositories {
     jcenter()
+
+    maven {
+        name = "TerraformersMC"
+        url = uri("http://maven.terraformersmc.com/releases/")
+    }
 }
 
 dependencies {
@@ -16,7 +21,7 @@ dependencies {
     modImplementation("net.fabricmc", "fabric-loader", "0.11.1")
 
     modImplementation("net.fabricmc.fabric-api", "fabric-api", "0.29.3+1.16")
-    modImplementation("io.github.prospector", "modmenu", "1.14.13+build.22")
+    modImplementation("com.terraformersmc", "modmenu", "1.14.14")
     modImplementation("me.shedaniel.cloth", "config-2", "4.8.2")
 }
 

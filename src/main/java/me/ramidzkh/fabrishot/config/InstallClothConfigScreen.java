@@ -24,18 +24,39 @@
 
 package me.ramidzkh.fabrishot.config;
 
-import io.github.prospector.modmenu.api.ConfigScreenFactory;
-import io.github.prospector.modmenu.api.ModMenuApi;
-import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.util.NarratorManager;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.Text;
 
-public class ModMenuBridge implements ModMenuApi {
+public class InstallClothConfigScreen extends Screen {
+
+    private static final Text INSTALL_CLOTH_CONFIG = Text.of("You must install Cloth Config");
+    private final Screen parent;
+
+    public InstallClothConfigScreen(Screen parent) {
+        super(NarratorManager.EMPTY);
+        this.parent = parent;
+    }
 
     @Override
-    public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        if (FabricLoader.getInstance().isModLoaded("cloth-config2") && false) {
-            return new ClothConfigBridge();
-        } else {
-            return InstallClothConfigScreen::new;
-        }
+    protected void init() {
+        addButton(new ButtonWidget((width - 50) / 2, height - 100, 50, 20, Text.of("Ok"), button -> onClose()));
+    }
+
+    @Override
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        renderBackground(matrices);
+
+        int textWidth = client.textRenderer.getWidth(INSTALL_CLOTH_CONFIG);
+        client.textRenderer.drawWithShadow(matrices, INSTALL_CLOTH_CONFIG, (width - textWidth) / 2F, height / 3F, 0xFFFFFFFF);
+
+        super.render(matrices, mouseX, mouseY, delta);
+    }
+
+    @Override
+    public void onClose() {
+        client.openScreen(parent);
     }
 }

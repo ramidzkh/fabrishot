@@ -1,0 +1,8 @@
+{
+  "fabrishot.config.title": "Fabrishot",
+  "fabrishot.config.category": "Screenshot Größe",
+  "fabrishot.config.override_screenshot_key": "Normalen Screenshot überschreiben",
+  "fabrishot.config.width": "Screenshot Breite",
+  "fabrishot.config.height": "Screenshot Höhe",
+  "key.fabrishot.screenshot": "Großen Screenshot aufnehmen"
+}

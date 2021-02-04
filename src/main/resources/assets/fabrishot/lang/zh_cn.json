@@ -1,6 +1,7 @@
 {
   "fabrishot.config.title": "Fabrishot",
   "fabrishot.config.category": "截图尺寸",
+  "fabrishot.config.override_screenshot_key": "用 Fabrishot 替换默认的截图功能",
   "fabrishot.config.width": "截图宽度",
   "fabrishot.config.height": "截图高度",
   "key.fabrishot.screenshot": "截图（高分辨率）"

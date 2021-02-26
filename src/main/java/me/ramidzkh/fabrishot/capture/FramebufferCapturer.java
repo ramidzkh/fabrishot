@@ -25,6 +25,7 @@
 package me.ramidzkh.fabrishot.capture;
 
 import me.ramidzkh.fabrishot.MinecraftInterface;
+import me.ramidzkh.fabrishot.event.FramebufferCaptureCallback;
 import org.lwjgl.opengl.GL11;
 
 import java.nio.ByteBuffer;
@@ -80,5 +81,6 @@ public class FramebufferCapturer {
         MinecraftInterface.writeFramebuffer(bb, BYTES_PER_PIXEL);
 
         bb.rewind();
+        FramebufferCaptureCallback.EVENT.invoker().onCapture(bb);
     }
 }

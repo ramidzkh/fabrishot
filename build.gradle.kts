@@ -1,10 +1,10 @@
 plugins {
-    id("fabric-loom") version "0.6.21"
+    id("fabric-loom") version "0.6.48"
     id("org.cadixdev.licenser") version "0.5.0"
 }
 
 group = "me.ramidzkh"
-version = "1.2.3.1"
+version = "1.3.0"
 
 repositories {
     jcenter()

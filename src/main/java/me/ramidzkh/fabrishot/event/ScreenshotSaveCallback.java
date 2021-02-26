@@ -30,7 +30,7 @@ import net.fabricmc.fabric.api.event.EventFactory;
 import java.nio.file.Path;
 
 /**
- * Callback for right after a screenshot is saved
+ * Callback for immediately after a screenshot is saved
  */
 public interface ScreenshotSaveCallback {
 

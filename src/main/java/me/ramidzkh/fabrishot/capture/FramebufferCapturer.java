@@ -81,6 +81,6 @@ public class FramebufferCapturer {
         MinecraftInterface.writeFramebuffer(bb, BYTES_PER_PIXEL);
 
         bb.rewind();
-        FramebufferCaptureCallback.EVENT.invoker().onCapture(bb);
+        FramebufferCaptureCallback.EVENT.invoker().onCapture(dim2, bb);
     }
 }

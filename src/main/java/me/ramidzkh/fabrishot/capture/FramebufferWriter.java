@@ -24,6 +24,7 @@
 
 package me.ramidzkh.fabrishot.capture;
 
+import me.ramidzkh.fabrishot.event.ScreenshotSaveCallback;
 import org.lwjgl.stb.STBIWriteCallback;
 import org.lwjgl.stb.STBImageWrite;
 
@@ -51,6 +52,8 @@ public class FramebufferWriter {
         try (FileChannel fc = FileChannel.open(file, StandardOpenOption.CREATE, StandardOpenOption.WRITE)) {
             writeImage(fc);
         }
+
+        ScreenshotSaveCallback.EVENT.invoker().onSaved(file);
     }
 
     private void writeImage(FileChannel fc) throws IOException {

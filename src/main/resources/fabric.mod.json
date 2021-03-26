@@ -2,6 +2,7 @@
   "schemaVersion": 1,
   "id": "fabrishot",
   "version": "${version}",
+  "icon": "assets/fabrishot/icon.png",
   "environment": "client",
   "mixins": [
     "mixins.fabrishot.json"

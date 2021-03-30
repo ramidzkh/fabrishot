@@ -25,6 +25,7 @@
 package me.ramidzkh.fabrishot;
 
 import me.ramidzkh.fabrishot.capture.CaptureTask;
+import me.ramidzkh.fabrishot.config.Config;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.options.KeyBinding;
@@ -95,15 +96,20 @@ public class Fabrishot {
         } catch (IOException ex) {
             throw new UncheckedIOException(ex);
         }
-
-        // loop though suffixes while the file exists
-        int i = 0;
+    
         Path file;
-
-        do {
-            file = dir.resolve(String.format("huge_%s_%04d.png", DATE_FORMAT.format(new Date()), i++));
-        } while (Files.exists(file));
-
+    
+        if(Config.OVERRIDE_FILENAME_FORMAT){
+            // loop though suffixes while the file exists
+            int i = 0;
+        
+            do {
+                file = dir.resolve(String.format("huge_%s_%04d.png", DATE_FORMAT.format(new Date()), i++));
+            } while (Files.exists(file));
+        }else{
+            file = dir.resolve(String.format("%s.png", DATE_FORMAT.format(new Date())));
+        }
+    
         return file;
     }
 }

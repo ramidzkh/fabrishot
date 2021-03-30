@@ -33,6 +33,7 @@ import java.util.Properties;
 public class Config {
 
     public static boolean OVERRIDE_SCREENSHOT_KEY = false;
+    public static boolean OVERRIDE_FILENAME_FORMAT = true;
     public static int CAPTURE_WIDTH = 3840;
     public static int CAPTURE_HEIGHT = 2160;
 
@@ -42,6 +43,7 @@ public class Config {
             properties.load(reader);
 
             Config.OVERRIDE_SCREENSHOT_KEY = Boolean.parseBoolean(properties.getProperty("override_screenshot_key"));
+            Config.OVERRIDE_FILENAME_FORMAT = Boolean.parseBoolean(properties.getProperty("override_filename_format"));
             Config.CAPTURE_WIDTH = Integer.parseInt(properties.getProperty("width"));
             Config.CAPTURE_HEIGHT = Integer.parseInt(properties.getProperty("height"));
         } catch (Exception ignored) {

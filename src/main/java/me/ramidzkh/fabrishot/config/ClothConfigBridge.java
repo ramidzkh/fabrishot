@@ -48,7 +48,7 @@ public class ClothConfigBridge implements ConfigScreenFactory<Screen> {
                 .setSavingRunnable(() -> {
                     Properties properties = new Properties();
                     properties.put("override_screenshot_key", String.valueOf(Config.OVERRIDE_SCREENSHOT_KEY));
-                    properties.put("override_filename_format", String.valueOf(Config.OVERRIDE_FILENAME_FORMAT));
+                    properties.put("custom_filename_format", String.valueOf(Config.CUSTOM_FILENAME_FORMAT));
                     properties.put("width", String.valueOf(Config.CAPTURE_WIDTH));
                     properties.put("height", String.valueOf(Config.CAPTURE_HEIGHT));
 
@@ -67,9 +67,9 @@ public class ClothConfigBridge implements ConfigScreenFactory<Screen> {
                 .setSaveConsumer(b -> Config.OVERRIDE_SCREENSHOT_KEY = b)
                 .build());
     
-        category.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("fabrishot.config.override_filename_format"), Config.OVERRIDE_FILENAME_FORMAT)
+        category.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("fabrishot.config.custom_filename_format"), Config.CUSTOM_FILENAME_FORMAT)
                 .setDefaultValue(true)
-                .setSaveConsumer(b -> Config.OVERRIDE_FILENAME_FORMAT = b)
+                .setSaveConsumer(b -> Config.CUSTOM_FILENAME_FORMAT = b)
                 .build());
 
         category.addEntry(entryBuilder.startIntField(new TranslatableText("fabrishot.config.width"), Config.CAPTURE_WIDTH)

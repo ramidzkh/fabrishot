@@ -99,7 +99,7 @@ public class Fabrishot {
     
         Path file;
     
-        if(Config.OVERRIDE_FILENAME_FORMAT){
+        if(Config.CUSTOM_FILENAME_FORMAT){
             // loop though suffixes while the file exists
             int i = 0;
         

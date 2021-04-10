@@ -96,20 +96,17 @@ public class Fabrishot {
         } catch (IOException ex) {
             throw new UncheckedIOException(ex);
         }
-    
+
         Path file;
-    
-        if(Config.CUSTOM_FILENAME_FORMAT){
-            // loop though suffixes while the file exists
-            int i = 0;
-        
-            do {
-                file = dir.resolve(String.format("huge_%s_%04d.png", DATE_FORMAT.format(new Date()), i++));
-            } while (Files.exists(file));
-        }else{
-            file = dir.resolve(String.format("%s.png", DATE_FORMAT.format(new Date())));
-        }
-    
+        String prefix = Config.CUSTOM_FILENAME_FORMAT ? "huge_" : "";
+
+        // loop though suffixes while the file exists
+        int i = 1;
+
+        do {
+            file = dir.resolve(prefix + DATE_FORMAT.format(new Date()) + (i++ == 1 ? ".png" : "_" + i + ".png"));
+        } while (Files.exists(file));
+
         return file;
     }
 }

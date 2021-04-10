@@ -66,7 +66,7 @@ public class ClothConfigBridge implements ConfigScreenFactory<Screen> {
                 .setDefaultValue(false)
                 .setSaveConsumer(b -> Config.OVERRIDE_SCREENSHOT_KEY = b)
                 .build());
-    
+
         category.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("fabrishot.config.custom_filename_format"), Config.CUSTOM_FILENAME_FORMAT)
                 .setDefaultValue(true)
                 .setSaveConsumer(b -> Config.CUSTOM_FILENAME_FORMAT = b)

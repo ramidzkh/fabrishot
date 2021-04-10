@@ -4,25 +4,28 @@ plugins {
 }
 
 group = "me.ramidzkh"
-version = "1.3.0"
+version = "1.4.0"
 
 repositories {
-    jcenter()
-
     maven {
         name = "TerraformersMC"
-        url = uri("http://maven.terraformersmc.com/releases/")
+        url = uri("https://maven.terraformersmc.com/releases/")
+    }
+
+    maven {
+        name = "shedaniel"
+        url = uri("https://maven.shedaniel.me/")
     }
 }
 
 dependencies {
     minecraft("net.minecraft", "minecraft", "1.16.5")
-    mappings("net.fabricmc", "yarn", "1.16.5+build.1", classifier = "v2")
-    modImplementation("net.fabricmc", "fabric-loader", "0.11.1")
+    mappings("net.fabricmc", "yarn", "1.16.5+build.6", classifier = "v2")
+    modImplementation("net.fabricmc", "fabric-loader", "0.11.3")
 
-    modImplementation("net.fabricmc.fabric-api", "fabric-api", "0.29.3+1.16")
-    modImplementation("com.terraformersmc", "modmenu", "1.14.14")
-    modImplementation("me.shedaniel.cloth", "config-2", "4.8.2")
+    modImplementation("net.fabricmc.fabric-api", "fabric-api", "0.32.5+1.16")
+    modImplementation("com.terraformersmc", "modmenu", "1.16.9")
+    modImplementation("me.shedaniel.cloth", "cloth-config-fabric", "4.11.19")
 }
 
 java {

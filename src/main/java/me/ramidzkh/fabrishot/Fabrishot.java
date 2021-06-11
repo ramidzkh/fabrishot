@@ -28,7 +28,7 @@ import me.ramidzkh.fabrishot.capture.CaptureTask;
 import me.ramidzkh.fabrishot.config.Config;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.options.KeyBinding;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.ClickEvent;
 import net.minecraft.text.LiteralText;

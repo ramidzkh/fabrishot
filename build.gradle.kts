@@ -1,10 +1,10 @@
 plugins {
-    id("fabric-loom") version "0.6.48"
-    id("org.cadixdev.licenser") version "0.5.0"
+    id("fabric-loom") version "0.8.17"
+    id("org.cadixdev.licenser") version "0.6.0"
 }
 
 group = "me.ramidzkh"
-version = "1.4.0"
+version = "1.5.0"
 
 repositories {
     maven {
@@ -19,22 +19,22 @@ repositories {
 }
 
 dependencies {
-    minecraft("net.minecraft", "minecraft", "1.16.5")
-    mappings("net.fabricmc", "yarn", "1.16.5+build.6", classifier = "v2")
+    minecraft("net.minecraft", "minecraft", "1.17")
+    mappings("net.fabricmc", "yarn", "1.17+build.7", classifier = "v2")
     modImplementation("net.fabricmc", "fabric-loader", "0.11.3")
 
-    modImplementation("net.fabricmc.fabric-api", "fabric-api", "0.32.5+1.16")
-    modImplementation("com.terraformersmc", "modmenu", "1.16.9")
-    modImplementation("me.shedaniel.cloth", "cloth-config-fabric", "4.11.19")
+    modImplementation("net.fabricmc.fabric-api", "fabric-api", "0.35.0+1.17")
+    modImplementation("com.terraformersmc", "modmenu", "2.0.0-beta.7")
+    modImplementation("me.shedaniel.cloth", "cloth-config-fabric", "5.0.34")
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_16
+    targetCompatibility = JavaVersion.VERSION_16
 }
 
 license {
-    header = file("LICENSE")
+    setHeader(file("LICENSE"))
     include("**/*.java")
 }
 
@@ -43,10 +43,10 @@ tasks {
         options.encoding = "UTF-8"
 
         if (JavaVersion.current().isJava9Compatible) {
-            options.release.set(8)
+            options.release.set(16)
         } else {
-            sourceCompatibility = "8"
-            targetCompatibility = "8"
+            sourceCompatibility = "16"
+            targetCompatibility = "16"
         }
     }
 

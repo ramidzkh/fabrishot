@@ -35,7 +35,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Keyboard.class)
 public class KeyboardMixin {
 
-    @Inject(method = "onKey", at = @At(value = "FIELD", target = "Lnet/minecraft/client/options/GameOptions;keyScreenshot:Lnet/minecraft/client/options/KeyBinding;"))
+    @Inject(method = "onKey", at = @At(value = "FIELD", target = "Lnet/minecraft/client/option/GameOptions;keyScreenshot:Lnet/minecraft/client/option/KeyBinding;"))
     private void preScreenshot(long window, int key, int scancode, int i, int j, CallbackInfo callbackInfo) {
         // Injecting here allows us to work inside other menus
         if (Fabrishot.SCREENSHOT_BINDING.matchesKey(key, scancode)) {
@@ -43,7 +43,7 @@ public class KeyboardMixin {
         }
     }
 
-    @Inject(method = "onKey", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/ScreenshotUtils;saveScreenshot(Ljava/io/File;IILnet/minecraft/client/gl/Framebuffer;Ljava/util/function/Consumer;)V"), cancellable = true)
+    @Inject(method = "onKey", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/ScreenshotRecorder;saveScreenshot(Ljava/io/File;IILnet/minecraft/client/gl/Framebuffer;Ljava/util/function/Consumer;)V"), cancellable = true)
     private void onScreenshot(CallbackInfo callbackInfo) {
         if (Config.OVERRIDE_SCREENSHOT_KEY) {
             Fabrishot.startCapture();

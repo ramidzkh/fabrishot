@@ -43,7 +43,7 @@ public class KeyboardMixin {
         }
     }
 
-    @Inject(method = "onKey", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/ScreenshotRecorder;saveScreenshot(Ljava/io/File;IILnet/minecraft/client/gl/Framebuffer;Ljava/util/function/Consumer;)V"), cancellable = true)
+    @Inject(method = "onKey", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/ScreenshotRecorder;saveScreenshot(Ljava/io/File;Lnet/minecraft/client/gl/Framebuffer;Ljava/util/function/Consumer;)V"), cancellable = true)
     private void onScreenshot(CallbackInfo callbackInfo) {
         if (Config.OVERRIDE_SCREENSHOT_KEY) {
             Fabrishot.startCapture();

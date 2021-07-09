@@ -18,6 +18,7 @@
   "name": "Fabrishot",
   "description": "Take high resolution screenshots because why not",
   "depends": {
+    "minecraft": ">=1.17.1",
     "fabric-lifecycle-events-v1": "*",
     "fabric-key-binding-api-v1": "*"
   },

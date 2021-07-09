@@ -1,20 +1,28 @@
 plugins {
-    id("fabric-loom") version "0.8.17"
-    id("org.cadixdev.licenser") version "0.6.0"
+    id("fabric-loom") version "0.9.17"
+    id("org.cadixdev.licenser") version "0.6.1"
 }
 
 group = "me.ramidzkh"
-version = "1.5.0"
+version = "1.5.1"
 
 repositories {
     maven {
         name = "TerraformersMC"
-        url = uri("https://maven.terraformersmc.com/releases/")
+        url = uri("https://maven.quiltmc.org/repository/release/")
+
+        content {
+            includeGroup("com.terraformersmc")
+        }
     }
 
     maven {
         name = "shedaniel"
         url = uri("https://maven.shedaniel.me/")
+
+        content {
+            includeGroup("me.shedaniel.cloth")
+        }
     }
 }
 
@@ -24,7 +32,7 @@ dependencies {
     modImplementation("net.fabricmc", "fabric-loader", "0.11.6")
 
     modImplementation("net.fabricmc.fabric-api", "fabric-api", "0.36.1+1.17")
-    modImplementation("com.terraformersmc", "modmenu", "2.0.0-beta.7")
+    modImplementation("com.terraformersmc", "modmenu", "v2.0.2+1.17.2035ad2")
     modImplementation("me.shedaniel.cloth", "cloth-config-fabric", "5.0.34")
 }
 

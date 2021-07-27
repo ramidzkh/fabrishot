@@ -26,6 +26,7 @@ package me.ramidzkh.fabrishot;
 
 import me.ramidzkh.fabrishot.capture.CaptureTask;
 import me.ramidzkh.fabrishot.config.Config;
+import me.ramidzkh.fabrishot.event.ScreenshotSaveCallback;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
@@ -64,6 +65,7 @@ public class Fabrishot {
 
     public static void initialize() {
         KeyBindingHelper.registerKeyBinding(SCREENSHOT_BINDING);
+        ScreenshotSaveCallback.EVENT.register(path -> Fabrishot.printFileLink(task.getFile().toFile()));
     }
 
     public static void startCapture() {
@@ -74,7 +76,6 @@ public class Fabrishot {
 
     public static void onRenderPreOrPost() {
         if (task != null && task.onRenderTick()) {
-            Fabrishot.printFileLink(task.getFile().toFile());
             task = null;
         }
     }

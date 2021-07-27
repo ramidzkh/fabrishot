@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "me.ramidzkh"
-version = "1.5.1"
+version = "1.5.2"
 
 repositories {
     maven {
@@ -49,13 +49,7 @@ license {
 tasks {
     withType<JavaCompile> {
         options.encoding = "UTF-8"
-
-        if (JavaVersion.current().isJava9Compatible) {
-            options.release.set(16)
-        } else {
-            sourceCompatibility = "16"
-            targetCompatibility = "16"
-        }
+        options.release.set(16)
     }
 
     withType<AbstractArchiveTask> {

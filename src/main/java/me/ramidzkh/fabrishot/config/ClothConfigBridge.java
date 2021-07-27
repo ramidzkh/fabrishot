@@ -24,6 +24,7 @@
 
 package me.ramidzkh.fabrishot.config;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.prospector.modmenu.api.ConfigScreenFactory;
 import me.ramidzkh.fabrishot.Fabrishot;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
@@ -75,14 +76,14 @@ public class ClothConfigBridge implements ConfigScreenFactory<Screen> {
         category.addEntry(entryBuilder.startIntField(new TranslatableText("fabrishot.config.width"), Config.CAPTURE_WIDTH)
                 .setDefaultValue(3840)
                 .setMin(1)
-                .setMax(65535)
+                .setMax(Math.min(65535, RenderSystem.maxSupportedTextureSize()))
                 .setSaveConsumer(i -> Config.CAPTURE_WIDTH = i)
                 .build());
 
         category.addEntry(entryBuilder.startIntField(new TranslatableText("fabrishot.config.height"), Config.CAPTURE_HEIGHT)
                 .setDefaultValue(2160)
                 .setMin(1)
-                .setMax(65535)
+                .setMax(Math.min(65535, RenderSystem.maxSupportedTextureSize()))
                 .setSaveConsumer(i -> Config.CAPTURE_HEIGHT = i)
                 .build());
         return builder.build();

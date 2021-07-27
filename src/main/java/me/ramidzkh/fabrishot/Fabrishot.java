@@ -73,16 +73,9 @@ public class Fabrishot {
     }
 
     public static void onRenderPreOrPost() {
-        if (task != null) {
-            try {
-                if (task.onRenderTick()) {
-                    Fabrishot.printFileLink(task.getFile().toFile());
-                    task = null;
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                task = null;
-            }
+        if (task != null && task.onRenderTick()) {
+            Fabrishot.printFileLink(task.getFile().toFile());
+            task = null;
         }
     }
 

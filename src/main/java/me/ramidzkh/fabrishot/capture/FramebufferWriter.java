@@ -47,8 +47,6 @@ public class FramebufferWriter {
     }
 
     public void write() throws IOException {
-        fbc.capture();
-
         try (FileChannel fc = FileChannel.open(file, StandardOpenOption.CREATE, StandardOpenOption.WRITE)) {
             writeImage(fc);
         }

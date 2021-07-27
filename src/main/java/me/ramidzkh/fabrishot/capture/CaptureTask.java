@@ -24,9 +24,11 @@
 
 package me.ramidzkh.fabrishot.capture;
 
-import me.ramidzkh.fabrishot.config.Config;
 import me.ramidzkh.fabrishot.MinecraftInterface;
+import me.ramidzkh.fabrishot.config.Config;
+import net.minecraft.util.Util;
 
+import java.io.IOException;
 import java.nio.file.Path;
 
 public class CaptureTask {
@@ -45,7 +47,7 @@ public class CaptureTask {
         return file;
     }
 
-    public boolean onRenderTick() throws Exception {
+    public boolean onRenderTick() {
         switch (frame) {
             // override viewport size (the following frame will be black)
             case 0:
@@ -63,8 +65,17 @@ public class CaptureTask {
             case 3:
                 try {
                     FramebufferCapturer fbc = new FramebufferCapturer();
-                    FramebufferWriter fbw = new FramebufferWriter(file, fbc);
-                    fbw.write();
+                    fbc.capture();
+
+                    Util.getIoWorkerExecutor().execute(() -> {
+                        FramebufferWriter fbw = new FramebufferWriter(file, fbc);
+
+                        try {
+                            fbw.write();
+                        } catch (IOException exception) {
+                            exception.printStackTrace();
+                        }
+                    });
                 } finally {
                     // restore viewport/framebuffer
                     MinecraftInterface.resize(displayWidth, displayHeight);

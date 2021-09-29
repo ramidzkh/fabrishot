@@ -25,7 +25,7 @@
 package me.ramidzkh.fabrishot.config;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import io.github.prospector.modmenu.api.ConfigScreenFactory;
+import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import me.ramidzkh.fabrishot.Fabrishot;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;

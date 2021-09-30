@@ -9,7 +9,7 @@ version = "1.5.2"
 repositories {
     maven {
         name = "TerraformersMC"
-        url = uri("https://maven.quiltmc.org/repository/release/")
+        url = uri("https://maven.terraformersmc.com")
 
         content {
             includeGroup("com.terraformersmc")
@@ -32,7 +32,7 @@ dependencies {
     modImplementation("net.fabricmc", "fabric-loader", "0.11.6")
 
     modImplementation("net.fabricmc.fabric-api", "fabric-api", "0.36.1+1.17")
-    modImplementation("com.terraformersmc", "modmenu", "v2.0.2+1.17.2035ad2")
+    modImplementation("com.terraformersmc", "modmenu", "2.0.13")
     modImplementation("me.shedaniel.cloth", "cloth-config-fabric", "5.0.34")
 }
 

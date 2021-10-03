@@ -28,7 +28,7 @@ repositories {
 
 dependencies {
     minecraft("net.minecraft", "minecraft", "1.17.1")
-    mappings("net.fabricmc", "yarn", "1.17.1+build.1", classifier = "v2")
+    mappings("net.fabricmc", "yarn", "1.17.1+build.61", classifier = "v2")
     modImplementation("net.fabricmc", "fabric-loader", "0.11.6")
 
     modImplementation("net.fabricmc.fabric-api", "fabric-api", "0.36.1+1.17")

@@ -57,6 +57,6 @@ public class InstallClothConfigScreen extends Screen {
 
     @Override
     public void onClose() {
-        client.openScreen(parent);
+        client.setScreen(parent);
     }
 }

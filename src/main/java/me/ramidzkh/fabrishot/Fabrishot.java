@@ -57,6 +57,7 @@ public class Fabrishot {
 
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss");
     private static CaptureTask task;
+    private static File lastFile;
 
     private static void printFileLink(File file) {
         Text text = new LiteralText(file.getName()).formatted(Formatting.UNDERLINE).styled(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, file.getAbsolutePath())));
@@ -65,7 +66,7 @@ public class Fabrishot {
 
     public static void initialize() {
         KeyBindingHelper.registerKeyBinding(SCREENSHOT_BINDING);
-        ScreenshotSaveCallback.EVENT.register(path -> Fabrishot.printFileLink(task.getFile().toFile()));
+        ScreenshotSaveCallback.EVENT.register(path -> Fabrishot.printFileLink(lastFile));
     }
 
     public static void startCapture() {
@@ -76,6 +77,7 @@ public class Fabrishot {
 
     public static void onRenderPreOrPost() {
         if (task != null && task.onRenderTick()) {
+            lastFile = task.getFile().toFile();
             task = null;
         }
     }

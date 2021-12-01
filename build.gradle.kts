@@ -1,15 +1,14 @@
 plugins {
-    id("fabric-loom") version "0.9.17"
-    id("org.cadixdev.licenser") version "0.6.1"
+    id("fabric-loom") version "0.10.62"
 }
 
 group = "me.ramidzkh"
-version = "1.5.2"
+version = "1.6.0"
 
 repositories {
     maven {
         name = "TerraformersMC"
-        url = uri("https://maven.terraformersmc.com")
+        url = uri("https://maven.terraformersmc.com/releases/")
 
         content {
             includeGroup("com.terraformersmc")
@@ -27,29 +26,24 @@ repositories {
 }
 
 dependencies {
-    minecraft("net.minecraft", "minecraft", "1.17.1")
-    mappings("net.fabricmc", "yarn", "1.17.1+build.61", classifier = "v2")
-    modImplementation("net.fabricmc", "fabric-loader", "0.11.6")
+    minecraft("net.minecraft", "minecraft", "1.18")
+    mappings("net.fabricmc", "yarn", "1.18+build.1", classifier = "v2")
+    modImplementation("net.fabricmc", "fabric-loader", "0.12.7")
 
-    modImplementation("net.fabricmc.fabric-api", "fabric-api", "0.36.1+1.17")
-    modImplementation("com.terraformersmc", "modmenu", "2.0.13")
-    modImplementation("me.shedaniel.cloth", "cloth-config-fabric", "5.0.34")
+    modImplementation("net.fabricmc.fabric-api", "fabric-api", "0.43.1+1.18")
+    modImplementation("com.terraformersmc", "modmenu", "3.0.0")
+    modImplementation("me.shedaniel.cloth", "cloth-config-fabric", "6.0.42")
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_16
-    targetCompatibility = JavaVersion.VERSION_16
-}
-
-license {
-    setHeader(file("LICENSE"))
-    include("**/*.java")
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 tasks {
     withType<JavaCompile> {
         options.encoding = "UTF-8"
-        options.release.set(16)
+        options.release.set(17)
     }
 
     withType<AbstractArchiveTask> {

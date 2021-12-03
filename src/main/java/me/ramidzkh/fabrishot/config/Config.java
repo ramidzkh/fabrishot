@@ -24,10 +24,15 @@
 
 package me.ramidzkh.fabrishot.config;
 
+import me.ramidzkh.fabrishot.Fabrishot;
 import net.fabricmc.loader.api.FabricLoader;
+import org.apache.logging.log4j.LogManager;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Properties;
 
 public class Config {
@@ -37,8 +42,10 @@ public class Config {
     public static int CAPTURE_WIDTH = 3840;
     public static int CAPTURE_HEIGHT = 2160;
 
+    private static final Path CONFIG = FabricLoader.getInstance().getConfigDir().resolve("fabrishot.properties");
+
     static {
-        try (BufferedReader reader = Files.newBufferedReader(FabricLoader.getInstance().getConfigDir().resolve("fabrishot.properties"))) {
+        try (BufferedReader reader = Files.newBufferedReader(CONFIG)) {
             Properties properties = new Properties();
             properties.load(reader);
 
@@ -47,6 +54,21 @@ public class Config {
             Config.CAPTURE_WIDTH = Integer.parseInt(properties.getProperty("width"));
             Config.CAPTURE_HEIGHT = Integer.parseInt(properties.getProperty("height"));
         } catch (Exception ignored) {
+            save();
+        }
+    }
+
+    static void save() {
+        Properties properties = new Properties();
+        properties.put("override_screenshot_key", String.valueOf(Config.OVERRIDE_SCREENSHOT_KEY));
+        properties.put("custom_filename_format", String.valueOf(Config.CUSTOM_FILENAME_FORMAT));
+        properties.put("width", String.valueOf(Config.CAPTURE_WIDTH));
+        properties.put("height", String.valueOf(Config.CAPTURE_HEIGHT));
+
+        try (BufferedWriter writer = Files.newBufferedWriter(CONFIG)) {
+            properties.store(writer, "Fabrishot screenshot config");
+        } catch (IOException exception) {
+            LogManager.getLogger(Fabrishot.class).error(exception.getMessage(), exception);
         }
     }
 }

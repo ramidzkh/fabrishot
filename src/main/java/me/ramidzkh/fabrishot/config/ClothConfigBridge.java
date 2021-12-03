@@ -26,19 +26,11 @@ package me.ramidzkh.fabrishot.config;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
-import me.ramidzkh.fabrishot.Fabrishot;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.TranslatableText;
-import org.apache.logging.log4j.LogManager;
-
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.Properties;
 
 public class ClothConfigBridge implements ConfigScreenFactory<Screen> {
 
@@ -46,19 +38,7 @@ public class ClothConfigBridge implements ConfigScreenFactory<Screen> {
     public Screen create(Screen parent) {
         ConfigBuilder builder = ConfigBuilder.create()
                 .setTitle(new TranslatableText("fabrishot.config.title"))
-                .setSavingRunnable(() -> {
-                    Properties properties = new Properties();
-                    properties.put("override_screenshot_key", String.valueOf(Config.OVERRIDE_SCREENSHOT_KEY));
-                    properties.put("custom_filename_format", String.valueOf(Config.CUSTOM_FILENAME_FORMAT));
-                    properties.put("width", String.valueOf(Config.CAPTURE_WIDTH));
-                    properties.put("height", String.valueOf(Config.CAPTURE_HEIGHT));
-
-                    try (BufferedWriter writer = Files.newBufferedWriter(FabricLoader.getInstance().getConfigDir().resolve("fabrishot.properties"))) {
-                        properties.store(writer, "Fabrishot screenshot config");
-                    } catch (IOException exception) {
-                        LogManager.getLogger(Fabrishot.class).error(exception.getMessage(), exception);
-                    }
-                })
+                .setSavingRunnable(Config::save)
                 .setParentScreen(parent);
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
         ConfigCategory category = builder.getOrCreateCategory(new TranslatableText("fabrishot.config.category"));

@@ -5,5 +5,7 @@
   "fabrishot.config.custom_filename_format": "Use different filename format",
   "fabrishot.config.width": "Screenshot width",
   "fabrishot.config.height": "Screenshot height",
+  "fabrishot.config.delay": "Capture delay",
+  "fabrishot.config.delay.tooltip": "Frames to wait after resizing. Tweak for better exposure with shaders",
   "key.fabrishot.screenshot": "Take large screenshot"
 }

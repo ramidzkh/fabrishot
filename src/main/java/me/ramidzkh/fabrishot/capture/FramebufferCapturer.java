@@ -40,7 +40,7 @@ public class FramebufferCapturer {
 
     public FramebufferCapturer() {
         dim = getCurrentDimension();
-        bb = ByteBuffer.allocateDirect(dim.width * dim.height * BYTES_PER_PIXEL);
+        bb = ByteBuffer.allocateDirect(dim.width() * dim.height() * BYTES_PER_PIXEL);
     }
 
     public int getBytesPerPixel() {
@@ -68,10 +68,7 @@ public class FramebufferCapturer {
         Dimension dim1 = getCurrentDimension();
         Dimension dim2 = getCaptureDimension();
         if (!dim1.equals(dim2)) {
-            throw new IllegalStateException(String.format(
-                    "Display size changed! %dx%d != %dx%d",
-                    dim1.width, dim1.height,
-                    dim2.width, dim2.height));
+            throw new IllegalStateException(String.format("Display size changed! %s != %s", dim1, dim2));
         }
 
         // set alignment flags

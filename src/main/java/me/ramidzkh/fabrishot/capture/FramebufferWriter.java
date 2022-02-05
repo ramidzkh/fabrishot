@@ -58,7 +58,7 @@ public class FramebufferWriter {
         Dimension dim = fbc.getCaptureDimension();
 
         try (WriteCallback callback = new WriteCallback(fc)) {
-            STBImageWrite.stbi_write_png_to_func(callback, 0L, dim.width, dim.height, fbc.getChannelCount(), fbc.getDataBuffer(), 0);
+            STBImageWrite.stbi_write_png_to_func(callback, 0L, dim.width(), dim.height(), fbc.getChannelCount(), fbc.getDataBuffer(), 0);
 
             if (callback.exception != null) {
                 throw callback.exception;

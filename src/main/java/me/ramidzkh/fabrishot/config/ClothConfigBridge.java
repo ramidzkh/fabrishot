@@ -66,6 +66,13 @@ public class ClothConfigBridge implements ConfigScreenFactory<Screen> {
                 .setMax(Math.min(65535, RenderSystem.maxSupportedTextureSize()))
                 .setSaveConsumer(i -> Config.CAPTURE_HEIGHT = i)
                 .build());
+
+        category.addEntry(entryBuilder.startIntField(new TranslatableText("fabrishot.config.delay"), Config.CAPTURE_DELAY)
+                .setTooltip(new TranslatableText("fabrishot.config.delay.tooltip"))
+                .setDefaultValue(3)
+                .setMin(3)
+                .setSaveConsumer(i -> Config.CAPTURE_DELAY = i)
+                .build());
         return builder.build();
     }
 }

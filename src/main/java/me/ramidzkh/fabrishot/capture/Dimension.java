@@ -24,30 +24,7 @@
 
 package me.ramidzkh.fabrishot.capture;
 
-import java.util.Objects;
-
-public class Dimension {
-
-    public final int width, height;
-
-    public Dimension(int width, int height) {
-        this.width = width;
-        this.height = height;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Dimension dimension = (Dimension) o;
-        return width == dimension.width &&
-                height == dimension.height;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(width, height);
-    }
+public record Dimension(int width, int height) {
 
     @Override
     public String toString() {

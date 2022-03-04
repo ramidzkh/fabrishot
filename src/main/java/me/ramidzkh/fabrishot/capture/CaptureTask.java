@@ -64,15 +64,17 @@ public class CaptureTask {
                 FramebufferCapturer fbc = new FramebufferCapturer();
                 fbc.capture();
 
-                Util.getIoWorkerExecutor().execute(() -> {
-                    FramebufferWriter fbw = new FramebufferWriter(file, fbc);
+                if (Config.SAVE_FILE) {
+                    Util.getIoWorkerExecutor().execute(() -> {
+                        FramebufferWriter fbw = new FramebufferWriter(file, fbc);
 
-                    try {
-                        fbw.write();
-                    } catch (IOException exception) {
-                        exception.printStackTrace();
-                    }
-                });
+                        try {
+                            fbw.write();
+                        } catch (IOException exception) {
+                            exception.printStackTrace();
+                        }
+                    });
+                }
             } finally {
                 // restore viewport/framebuffer
                 MinecraftInterface.resize(displayWidth, displayHeight);

@@ -53,6 +53,11 @@ public class ClothConfigBridge implements ConfigScreenFactory<Screen> {
                 .setSaveConsumer(b -> Config.CUSTOM_FILENAME_FORMAT = b)
                 .build());
 
+        category.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("fabrishot.config.save_file"), Config.SAVE_FILE)
+                .setDefaultValue(true)
+                .setSaveConsumer(b -> Config.SAVE_FILE = b)
+                .build());
+
         category.addEntry(entryBuilder.startIntField(new TranslatableText("fabrishot.config.width"), Config.CAPTURE_WIDTH)
                 .setDefaultValue(3840)
                 .setMin(1)

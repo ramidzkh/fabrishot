@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "me.ramidzkh"
-version = "1.6.2"
+version = "1.7.0"
 
 repositories {
     maven {
@@ -26,13 +26,13 @@ repositories {
 }
 
 dependencies {
-    minecraft("net.minecraft", "minecraft", "1.18")
-    mappings("net.fabricmc", "yarn", "1.18+build.1", classifier = "v2")
-    modImplementation("net.fabricmc", "fabric-loader", "0.12.7")
+    minecraft("net.minecraft", "minecraft", "1.18.2")
+    mappings("net.fabricmc", "yarn", "1.18.2+build.1", classifier = "v2")
+    modImplementation("net.fabricmc", "fabric-loader", "0.13.3")
 
-    modImplementation("net.fabricmc.fabric-api", "fabric-api", "0.43.1+1.18")
+    modImplementation("net.fabricmc.fabric-api", "fabric-api", "0.47.9+1.18.2")
     modImplementation("com.terraformersmc", "modmenu", "3.0.0")
-    modImplementation("me.shedaniel.cloth", "cloth-config-fabric", "6.0.42")
+    modImplementation("me.shedaniel.cloth", "cloth-config-fabric", "6.2.57")
 }
 
 java {

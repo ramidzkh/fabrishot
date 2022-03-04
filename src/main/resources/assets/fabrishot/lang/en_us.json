@@ -3,6 +3,7 @@
   "fabrishot.config.category": "Screenshot dimensions",
   "fabrishot.config.override_screenshot_key": "Override normal screenshot with Fabrishot",
   "fabrishot.config.custom_filename_format": "Use different filename format",
+  "fabrishot.config.save_file": "Save the screenshot file",
   "fabrishot.config.width": "Screenshot width",
   "fabrishot.config.height": "Screenshot height",
   "fabrishot.config.delay": "Capture delay",

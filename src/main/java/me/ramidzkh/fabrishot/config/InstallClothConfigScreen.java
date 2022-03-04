@@ -42,7 +42,7 @@ public class InstallClothConfigScreen extends Screen {
 
     @Override
     protected void init() {
-        addDrawableChild(new ButtonWidget((width - 50) / 2, height - 100, 50, 20, Text.of("Ok"), button -> onClose()));
+        addDrawableChild(new ButtonWidget((width - 50) / 2, height - 100, 50, 20, Text.of("Ok"), button -> removed()));
     }
 
     @Override
@@ -56,7 +56,7 @@ public class InstallClothConfigScreen extends Screen {
     }
 
     @Override
-    public void onClose() {
+    public void removed() {
         client.setScreen(parent);
     }
 }

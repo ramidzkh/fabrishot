@@ -30,50 +30,50 @@ import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 
 public class ClothConfigBridge implements ConfigScreenFactory<Screen> {
 
     @Override
     public Screen create(Screen parent) {
         ConfigBuilder builder = ConfigBuilder.create()
-                .setTitle(new TranslatableText("fabrishot.config.title"))
+                .setTitle(Text.translatable("fabrishot.config.title"))
                 .setSavingRunnable(Config::save)
                 .setParentScreen(parent);
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
-        ConfigCategory category = builder.getOrCreateCategory(new TranslatableText("fabrishot.config.category"));
+        ConfigCategory category = builder.getOrCreateCategory(Text.translatable("fabrishot.config.category"));
 
-        category.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("fabrishot.config.override_screenshot_key"), Config.OVERRIDE_SCREENSHOT_KEY)
+        category.addEntry(entryBuilder.startBooleanToggle(Text.translatable("fabrishot.config.override_screenshot_key"), Config.OVERRIDE_SCREENSHOT_KEY)
                 .setDefaultValue(false)
                 .setSaveConsumer(b -> Config.OVERRIDE_SCREENSHOT_KEY = b)
                 .build());
 
-        category.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("fabrishot.config.custom_filename_format"), Config.CUSTOM_FILENAME_FORMAT)
+        category.addEntry(entryBuilder.startBooleanToggle(Text.translatable("fabrishot.config.custom_filename_format"), Config.CUSTOM_FILENAME_FORMAT)
                 .setDefaultValue(true)
                 .setSaveConsumer(b -> Config.CUSTOM_FILENAME_FORMAT = b)
                 .build());
 
-        category.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("fabrishot.config.save_file"), Config.SAVE_FILE)
+        category.addEntry(entryBuilder.startBooleanToggle(Text.translatable("fabrishot.config.save_file"), Config.SAVE_FILE)
                 .setDefaultValue(true)
                 .setSaveConsumer(b -> Config.SAVE_FILE = b)
                 .build());
 
-        category.addEntry(entryBuilder.startIntField(new TranslatableText("fabrishot.config.width"), Config.CAPTURE_WIDTH)
+        category.addEntry(entryBuilder.startIntField(Text.translatable("fabrishot.config.width"), Config.CAPTURE_WIDTH)
                 .setDefaultValue(3840)
                 .setMin(1)
                 .setMax(Math.min(65535, RenderSystem.maxSupportedTextureSize()))
                 .setSaveConsumer(i -> Config.CAPTURE_WIDTH = i)
                 .build());
 
-        category.addEntry(entryBuilder.startIntField(new TranslatableText("fabrishot.config.height"), Config.CAPTURE_HEIGHT)
+        category.addEntry(entryBuilder.startIntField(Text.translatable("fabrishot.config.height"), Config.CAPTURE_HEIGHT)
                 .setDefaultValue(2160)
                 .setMin(1)
                 .setMax(Math.min(65535, RenderSystem.maxSupportedTextureSize()))
                 .setSaveConsumer(i -> Config.CAPTURE_HEIGHT = i)
                 .build());
 
-        category.addEntry(entryBuilder.startIntField(new TranslatableText("fabrishot.config.delay"), Config.CAPTURE_DELAY)
-                .setTooltip(new TranslatableText("fabrishot.config.delay.tooltip"))
+        category.addEntry(entryBuilder.startIntField(Text.translatable("fabrishot.config.delay"), Config.CAPTURE_DELAY)
+                .setTooltip(Text.translatable("fabrishot.config.delay.tooltip"))
                 .setDefaultValue(3)
                 .setMin(3)
                 .setSaveConsumer(i -> Config.CAPTURE_DELAY = i)

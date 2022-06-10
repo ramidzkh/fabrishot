@@ -1,5 +1,5 @@
 plugins {
-    id("fabric-loom") version "0.10.62"
+    id("fabric-loom") version "0.12-SNAPSHOT"
 }
 
 group = "me.ramidzkh"
@@ -26,13 +26,13 @@ repositories {
 }
 
 dependencies {
-    minecraft("net.minecraft", "minecraft", "1.18.2")
-    mappings("net.fabricmc", "yarn", "1.18.2+build.1", classifier = "v2")
-    modImplementation("net.fabricmc", "fabric-loader", "0.13.3")
+    minecraft("net.minecraft", "minecraft", "1.19")
+    mappings("net.fabricmc", "yarn", "1.19+build.1")
+    modImplementation("net.fabricmc", "fabric-loader", "0.14.7")
 
-    modImplementation("net.fabricmc.fabric-api", "fabric-api", "0.47.9+1.18.2")
-    modImplementation("com.terraformersmc", "modmenu", "3.0.0")
-    modImplementation("me.shedaniel.cloth", "cloth-config-fabric", "6.2.57")
+    modImplementation("net.fabricmc.fabric-api", "fabric-api", "0.55.3+1.19")
+    modImplementation("com.terraformersmc", "modmenu", "4.0.0")
+    modImplementation("me.shedaniel.cloth", "cloth-config-fabric", "7.0.69")
 }
 
 java {

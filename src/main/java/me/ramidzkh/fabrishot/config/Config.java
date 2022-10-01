@@ -37,8 +37,8 @@ import java.util.Properties;
 
 public class Config {
 
+    public static String CUSTOM_FILE_NAME = "huge_%time%";
     public static boolean OVERRIDE_SCREENSHOT_KEY = false;
-    public static boolean CUSTOM_FILENAME_FORMAT = true;
     public static boolean SAVE_FILE = true;
     public static int CAPTURE_WIDTH = 3840;
     public static int CAPTURE_HEIGHT = 2160;
@@ -51,8 +51,8 @@ public class Config {
             Properties properties = new Properties();
             properties.load(reader);
 
+            Config.CUSTOM_FILE_NAME = properties.getProperty("custom_file_name");
             Config.OVERRIDE_SCREENSHOT_KEY = Boolean.parseBoolean(properties.getProperty("override_screenshot_key"));
-            Config.CUSTOM_FILENAME_FORMAT = Boolean.parseBoolean(properties.getProperty("custom_filename_format"));
             Config.SAVE_FILE = Boolean.parseBoolean(properties.getProperty("save_file"));
             Config.CAPTURE_WIDTH = Integer.parseInt(properties.getProperty("width"));
             Config.CAPTURE_HEIGHT = Integer.parseInt(properties.getProperty("height"));
@@ -64,8 +64,8 @@ public class Config {
 
     static void save() {
         Properties properties = new Properties();
+        properties.put("custom_file_name", Config.CUSTOM_FILE_NAME);
         properties.put("override_screenshot_key", String.valueOf(Config.OVERRIDE_SCREENSHOT_KEY));
-        properties.put("custom_filename_format", String.valueOf(Config.CUSTOM_FILENAME_FORMAT));
         properties.put("save_file", String.valueOf(Config.SAVE_FILE));
         properties.put("width", String.valueOf(Config.CAPTURE_WIDTH));
         properties.put("height", String.valueOf(Config.CAPTURE_HEIGHT));

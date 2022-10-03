@@ -43,14 +43,15 @@ public class ClothConfigBridge implements ConfigScreenFactory<Screen> {
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
         ConfigCategory category = builder.getOrCreateCategory(Text.translatable("fabrishot.config.category"));
 
+        category.addEntry(entryBuilder.startStrField(Text.translatable("fabrishot.config.custom_file_name"), Config.CUSTOM_FILE_NAME)
+                .setTooltip(Text.translatable("fabrishot.config.custom_file_name.tooltip"))
+                .setDefaultValue("huge_%time%")
+                .setSaveConsumer(b -> Config.CUSTOM_FILE_NAME = b)
+                .build());
+
         category.addEntry(entryBuilder.startBooleanToggle(Text.translatable("fabrishot.config.override_screenshot_key"), Config.OVERRIDE_SCREENSHOT_KEY)
                 .setDefaultValue(false)
                 .setSaveConsumer(b -> Config.OVERRIDE_SCREENSHOT_KEY = b)
-                .build());
-
-        category.addEntry(entryBuilder.startBooleanToggle(Text.translatable("fabrishot.config.custom_filename_format"), Config.CUSTOM_FILENAME_FORMAT)
-                .setDefaultValue(true)
-                .setSaveConsumer(b -> Config.CUSTOM_FILENAME_FORMAT = b)
                 .build());
 
         category.addEntry(entryBuilder.startBooleanToggle(Text.translatable("fabrishot.config.save_file"), Config.SAVE_FILE)

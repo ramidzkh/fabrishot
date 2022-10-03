@@ -91,14 +91,24 @@ public class Fabrishot {
             throw new UncheckedIOException(ex);
         }
 
+        String world = "";
+
+        if (client.getServer() != null) {
+            world = client.getServer().getSaveProperties().getLevelName();
+        } else if (client.getCurrentServerEntry() != null) {
+            world = client.getCurrentServerEntry().name;
+        }
+
         Path file;
-        String prefix = Config.CUSTOM_FILENAME_FORMAT ? "huge_" : "";
+        String prefix = Config.CUSTOM_FILE_NAME
+                .replace("%time%", DATE_FORMAT.format(new Date()))
+                .replace("%world%", world);
 
         // loop though suffixes while the file exists
         int i = 1;
 
         do {
-            file = dir.resolve(prefix + DATE_FORMAT.format(new Date()) + (i++ == 1 ? ".png" : "_" + i + ".png"));
+            file = dir.resolve(prefix + (i++ == 1 ? ".png" : "_" + i + ".png"));
         } while (Files.exists(file));
 
         return file;

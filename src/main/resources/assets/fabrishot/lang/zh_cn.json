@@ -1,8 +1,13 @@
 {
   "fabrishot.config.title": "Fabrishot",
   "fabrishot.config.category": "截图尺寸",
+  "fabrishot.config.custom_file_name": "Use different filename format",
+  "fabrishot.config.custom_file_name.tooltip": "Use %time% for the time,\n %world% for world or server name",
   "fabrishot.config.override_screenshot_key": "用 Fabrishot 替换默认的截图功能",
+  "fabrishot.config.save_file": "Save the screenshot file",
   "fabrishot.config.width": "截图宽度",
   "fabrishot.config.height": "截图高度",
+  "fabrishot.config.delay": "Capture delay",
+  "fabrishot.config.delay.tooltip": "Frames to wait after resizing. Tweak for better exposure with shaders",
   "key.fabrishot.screenshot": "截图（高分辨率）"
 }

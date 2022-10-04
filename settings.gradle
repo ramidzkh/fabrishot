@@ -1,9 +1,7 @@
-rootProject.name = "fabrishot"
-
 pluginManagement {
     repositories {
         gradlePluginPortal()
-        jcenter()
+        mavenCentral()
 
         maven {
             name = "Fabric"
@@ -11,3 +9,5 @@ pluginManagement {
         }
     }
 }
+
+rootProject.name = "fabrishot"

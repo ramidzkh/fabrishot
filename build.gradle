@@ -1,0 +1,125 @@
+plugins {
+    id("fabric-loom") version "1.0-SNAPSHOT"
+    id("com.matthewprenger.cursegradle") version "1.4.0"
+    id("com.modrinth.minotaur") version "2.4.4"
+}
+
+group = "me.ramidzkh"
+version = System.getenv("FABRISHOT_VERSION") ?: "0.0.0"
+
+repositories {
+    maven {
+        name = "TerraformersMC"
+        url = uri("https://maven.terraformersmc.com/releases/")
+
+        content {
+            includeGroup("com.terraformersmc")
+        }
+    }
+
+    maven {
+        name = "shedaniel"
+        url = uri("https://maven.shedaniel.me/")
+
+        content {
+            includeGroup("me.shedaniel.cloth")
+        }
+    }
+}
+
+dependencies {
+    minecraft("net.minecraft:minecraft:1.19.2")
+    mappings("net.fabricmc:yarn:1.19.2+build.1")
+    modImplementation("net.fabricmc:fabric-loader:0.14.7")
+
+    modImplementation("net.fabricmc.fabric-api:fabric-api:0.62.0+1.19.2")
+    modImplementation("com.terraformersmc:modmenu:4.0.6")
+    modImplementation("me.shedaniel.cloth:cloth-config-fabric:8.2.88")
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+processResources {
+    inputs.property("version", project.version)
+
+    from("LICENSE")
+
+    filesMatching("fabric.mod.json") {
+        expand("version": project.version)
+    }
+}
+
+////////////////
+// CurseForge
+System.getenv("CURSEFORGE")?.with { String key ->
+    curseforge {
+        apiKey = key
+
+        project {
+            id = "404870"
+            changelogType = "markdown"
+            changelog = "View changelog at [the release page](https://github.com/ramidzkh/fabrishot/releases/tag/${version})"
+
+            if (version.contains("alpha")) {
+                releaseType = "alpha"
+            } else if (version.contains("beta")) {
+                releaseType = "beta"
+            } else {
+                releaseType = "release"
+            }
+
+            addGameVersion("1.19.2")
+            addGameVersion("1.19.1")
+            addGameVersion("1.19")
+            addGameVersion("Fabric")
+
+            mainArtifact(remapJar) {
+                displayName = "${project.version}"
+
+                relations {
+                    requiredDependency("fabric-api")
+                    optionalDependency("modmenu")
+                    optionalDependency("cloth-config")
+                }
+            }
+        }
+    }
+}
+
+////////////////
+// Modrinth
+modrinth {
+    token.set(System.getenv("MODRINTH"))
+    projectId.set("fabrishot")
+    changelog.set("View changelog at [the release page](https://github.com/ramidzkh/fabrishot/releases/tag/${version})")
+    versionNumber.set(project.version)
+
+    if (version.contains("alpha")) {
+        versionType.set("alpha")
+    } else if (version.contains("beta")) {
+        versionType.set("beta")
+    } else {
+        versionType.set("release")
+    }
+
+    uploadFile.set(remapJar)
+    gameVersions.addAll(["1.19.2", "1.19.1", "1.19"])
+
+    dependencies {
+        required.project("fabric-api")
+        optional.project("modmenu")
+        optional.project("cloth-config")
+    }
+}
+
+tasks.modrinth.onlyIf {
+    System.getenv("MODRINTH")
+}

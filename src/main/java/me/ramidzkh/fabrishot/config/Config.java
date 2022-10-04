@@ -51,7 +51,7 @@ public class Config {
             Properties properties = new Properties();
             properties.load(reader);
 
-            Config.CUSTOM_FILE_NAME = properties.getProperty("custom_file_name");
+            Config.CUSTOM_FILE_NAME = properties.getProperty("custom_file_name", "huge_%time%");
             Config.OVERRIDE_SCREENSHOT_KEY = Boolean.parseBoolean(properties.getProperty("override_screenshot_key"));
             Config.SAVE_FILE = Boolean.parseBoolean(properties.getProperty("save_file"));
             Config.CAPTURE_WIDTH = Integer.parseInt(properties.getProperty("width"));

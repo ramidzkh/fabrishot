@@ -1,8 +1,13 @@
 {
   "fabrishot.config.title": "Fabrishot",
   "fabrishot.config.category": "Kuvatõmmise suurus",
+  "fabrishot.config.custom_file_name": "Use different filename format",
+  "fabrishot.config.custom_file_name.tooltip": "Use %time% for the time,\n %world% for world or server name",
   "fabrishot.config.override_screenshot_key": "Tee tavalise kuvatõmmise asemel Fabrishoti kuvatõmmis",
+  "fabrishot.config.save_file": "Save the screenshot file",
   "fabrishot.config.width": "Kuvatõmmise laius",
   "fabrishot.config.height": "Kuvatõmmise kõrgus",
+  "fabrishot.config.delay": "Capture delay",
+  "fabrishot.config.delay.tooltip": "Frames to wait after resizing. Tweak for better exposure with shaders",
   "key.fabrishot.screenshot": "Loo suur kuvatõmmis"
 }

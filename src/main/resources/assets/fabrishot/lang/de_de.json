@@ -1,9 +1,13 @@
 {
   "fabrishot.config.title": "Fabrishot",
   "fabrishot.config.category": "Screenshot Größe",
+  "fabrishot.config.custom_file_name": "Use different filename format",
+  "fabrishot.config.custom_file_name.tooltip": "Use %time% for the time,\n %world% for world or server name",
   "fabrishot.config.override_screenshot_key": "Normalen Screenshot überschreiben",
-  "fabrishot.config.custom_filename_format": "Andere Dateinamenformat benutzen",
+  "fabrishot.config.save_file": "Save the screenshot file",
   "fabrishot.config.width": "Screenshot Breite",
   "fabrishot.config.height": "Screenshot Höhe",
+  "fabrishot.config.delay": "Capture delay",
+  "fabrishot.config.delay.tooltip": "Frames to wait after resizing. Tweak for better exposure with shaders",
   "key.fabrishot.screenshot": "Großen Screenshot aufnehmen"
 }

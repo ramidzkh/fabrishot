@@ -1,0 +1,13 @@
+{
+  "fabrishot.config.title": "Fabrishot",
+  "fabrishot.config.category": "Kuvankaappauksen asetukset",
+  "fabrishot.config.override_screenshot_key": "Korvaa tavallinen kuvankaappaus Fabrishotilla",
+  "fabrishot.config.custom_file_name": "Käytä omaa tiedostonimimuotoa",
+  "fabrishot.config.custom_file_name.tooltip": "%time% korvataan ajalla,\n %world% maailman tai palvelimen nimellä",
+  "fabrishot.config.save_file": "Tallenna kuvankaappaustiedosto",
+  "fabrishot.config.width": "Kuvankaappauksen leveys",
+  "fabrishot.config.height": "Kuvankaappauksen korkeus",
+  "fabrishot.config.delay": "Kaappauksen viive",
+  "fabrishot.config.delay.tooltip": "Skaalauksen jälkeen odotettavien kuvien määrä. Säädä parempaa valotusta varten varjostimien kanssa",
+  "key.fabrishot.screenshot": "Ota suuri kuvankaappaus"
+}

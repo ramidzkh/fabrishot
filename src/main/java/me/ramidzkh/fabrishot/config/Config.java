@@ -44,6 +44,7 @@ public class Config {
     public static int CAPTURE_WIDTH = 3840;
     public static int CAPTURE_HEIGHT = 2160;
     public static int CAPTURE_DELAY = 3;
+    public static FileFormat CAPTURE_FILE_FORMAT = FileFormat.PNG;
 
     private static final Path CONFIG = FabricLoader.getInstance().getConfigDir().resolve("fabrishot.properties");
 
@@ -59,6 +60,7 @@ public class Config {
             Config.CAPTURE_WIDTH = Integer.parseInt(properties.getProperty("width"));
             Config.CAPTURE_HEIGHT = Integer.parseInt(properties.getProperty("height"));
             Config.CAPTURE_DELAY = Integer.parseInt(properties.getProperty("delay"));
+            Config.CAPTURE_FILE_FORMAT = FileFormat.valueOf(properties.getProperty("file_format"));
         } catch (Exception ignored) {
             save();
         }
@@ -73,6 +75,7 @@ public class Config {
         properties.put("width", String.valueOf(Config.CAPTURE_WIDTH));
         properties.put("height", String.valueOf(Config.CAPTURE_HEIGHT));
         properties.put("delay", String.valueOf(Config.CAPTURE_DELAY));
+        properties.put("file_format", String.valueOf(Config.CAPTURE_FILE_FORMAT));
 
         try (BufferedWriter writer = Files.newBufferedWriter(CONFIG)) {
             properties.store(writer, "Fabrishot screenshot config");

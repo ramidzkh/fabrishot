@@ -84,6 +84,13 @@ public class ClothConfigBridge implements ConfigScreenFactory<Screen> {
                 .setMin(3)
                 .setSaveConsumer(i -> Config.CAPTURE_DELAY = i)
                 .build());
+
+        category.addEntry(entryBuilder.startEnumSelector(Text.translatable("fabrishot.config.delay"), FileFormat.class, Config.CAPTURE_FILE_FORMAT)
+                .setTooltip(Text.translatable("fabrishot.config.delay.tooltip"))
+                .setDefaultValue(FileFormat.PNG)
+                .setSaveConsumer(t -> Config.CAPTURE_FILE_FORMAT = t)
+                .build());
+
         return builder.build();
     }
 }

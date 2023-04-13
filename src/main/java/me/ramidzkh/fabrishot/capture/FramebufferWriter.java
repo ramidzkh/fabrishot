@@ -24,6 +24,7 @@
 
 package me.ramidzkh.fabrishot.capture;
 
+import me.ramidzkh.fabrishot.config.Config;
 import me.ramidzkh.fabrishot.event.ScreenshotSaveCallback;
 import org.lwjgl.stb.STBIWriteCallback;
 import org.lwjgl.stb.STBImageWrite;
@@ -58,7 +59,12 @@ public class FramebufferWriter {
         Dimension dim = fbc.getCaptureDimension();
 
         try (WriteCallback callback = new WriteCallback(fc)) {
-            STBImageWrite.stbi_write_png_to_func(callback, 0L, dim.width(), dim.height(), fbc.getChannelCount(), fbc.getDataBuffer(), 0);
+            switch (Config.CAPTURE_FILE_FORMAT) {
+                case PNG -> STBImageWrite.stbi_write_png_to_func(callback, 0L, dim.width(), dim.height(), fbc.getChannelCount(), fbc.getDataBuffer(), 0);
+                case JPG -> STBImageWrite.stbi_write_jpg_to_func(callback, 0L, dim.width(), dim.height(), fbc.getChannelCount(), fbc.getDataBuffer(), 90);
+                case TGA -> STBImageWrite.stbi_write_tga_to_func(callback, 0L, dim.width(), dim.height(), fbc.getChannelCount(), fbc.getDataBuffer());
+                case BMP -> STBImageWrite.stbi_write_bmp_to_func(callback, 0L, dim.width(), dim.height(), fbc.getChannelCount(), fbc.getDataBuffer());
+            }
 
             if (callback.exception != null) {
                 throw callback.exception;

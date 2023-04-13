@@ -26,6 +26,7 @@ package me.ramidzkh.fabrishot.capture;
 
 import me.ramidzkh.fabrishot.MinecraftInterface;
 import me.ramidzkh.fabrishot.config.Config;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Util;
 
 import java.io.IOException;
@@ -45,6 +46,15 @@ public class CaptureTask {
 
     public Path getFile() {
         return file;
+    }
+
+    public float getScaleFactor() {
+        if (MinecraftClient.getInstance().options.getGuiScale().getValue() == 0) {
+            return 1;
+        }
+
+        // might want to revisit this for weird screenshot resolutions
+        return Math.min((float) MinecraftInterface.getDisplayWidth() / displayWidth, (float) MinecraftInterface.getDisplayHeight() / displayHeight);
     }
 
     public boolean onRenderTick() {

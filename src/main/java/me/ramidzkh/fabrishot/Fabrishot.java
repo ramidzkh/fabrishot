@@ -113,4 +113,12 @@ public class Fabrishot {
 
         return file;
     }
+
+    public static float getScaleFactor() {
+        if (task != null) {
+            return task.getScaleFactor();
+        } else {
+            return 1;
+        }
+    }
 }

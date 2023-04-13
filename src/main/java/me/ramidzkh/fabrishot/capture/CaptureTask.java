@@ -39,6 +39,7 @@ public class CaptureTask {
     private int frame;
     private int displayWidth;
     private int displayHeight;
+    private boolean hudHidden;
 
     public CaptureTask(Path file) {
         this.file = file;
@@ -62,12 +63,14 @@ public class CaptureTask {
         if (frame == 0) {
             displayWidth = MinecraftInterface.getDisplayWidth();
             displayHeight = MinecraftInterface.getDisplayHeight();
+            hudHidden = MinecraftClient.getInstance().options.hudHidden;
 
             int width = Config.CAPTURE_WIDTH;
             int height = Config.CAPTURE_HEIGHT;
 
             // resize viewport/framebuffer
             MinecraftInterface.resize(width, height);
+            MinecraftClient.getInstance().options.hudHidden |= Config.HIDE_HUD;
         } else if (frame >= Config.CAPTURE_DELAY) {
             // capture screenshot and restore viewport size
             try {
@@ -88,6 +91,7 @@ public class CaptureTask {
             } finally {
                 // restore viewport/framebuffer
                 MinecraftInterface.resize(displayWidth, displayHeight);
+                MinecraftClient.getInstance().options.hudHidden = hudHidden;
             }
         }
 

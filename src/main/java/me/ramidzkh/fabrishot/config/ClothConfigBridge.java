@@ -54,6 +54,11 @@ public class ClothConfigBridge implements ConfigScreenFactory<Screen> {
                 .setSaveConsumer(b -> Config.OVERRIDE_SCREENSHOT_KEY = b)
                 .build());
 
+        category.addEntry(entryBuilder.startBooleanToggle(Text.translatable("fabrishot.config.hide_hud"), Config.HIDE_HUD)
+                .setDefaultValue(false)
+                .setSaveConsumer(b -> Config.HIDE_HUD = b)
+                .build());
+
         category.addEntry(entryBuilder.startBooleanToggle(Text.translatable("fabrishot.config.save_file"), Config.SAVE_FILE)
                 .setDefaultValue(true)
                 .setSaveConsumer(b -> Config.SAVE_FILE = b)
@@ -79,6 +84,13 @@ public class ClothConfigBridge implements ConfigScreenFactory<Screen> {
                 .setMin(3)
                 .setSaveConsumer(i -> Config.CAPTURE_DELAY = i)
                 .build());
+
+        category.addEntry(entryBuilder.startEnumSelector(Text.translatable("fabrishot.config.delay"), FileFormat.class, Config.CAPTURE_FILE_FORMAT)
+                .setTooltip(Text.translatable("fabrishot.config.delay.tooltip"))
+                .setDefaultValue(FileFormat.PNG)
+                .setSaveConsumer(t -> Config.CAPTURE_FILE_FORMAT = t)
+                .build());
+
         return builder.build();
     }
 }

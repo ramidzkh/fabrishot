@@ -44,6 +44,7 @@ import java.nio.file.Path;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class Fabrishot {
 
@@ -108,9 +109,17 @@ public class Fabrishot {
         int i = 1;
 
         do {
-            file = dir.resolve(prefix + (i++ == 1 ? ".png" : "_" + i + ".png"));
+            file = dir.resolve(prefix + (i++ == 1 ? "" : "_" + i) + '.' + Config.CAPTURE_FILE_FORMAT.name().toLowerCase(Locale.ROOT));
         } while (Files.exists(file));
 
         return file;
+    }
+
+    public static float getScaleFactor() {
+        if (task != null) {
+            return task.getScaleFactor();
+        } else {
+            return 1;
+        }
     }
 }

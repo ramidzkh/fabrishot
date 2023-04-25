@@ -35,8 +35,6 @@ public interface MinecraftInterface {
     MinecraftClient CLIENT = MinecraftClient.getInstance();
 
     static void resize(int width, int height) {
-        CLIENT.getFramebuffer().resize(width, height, true);
-
         WindowAccessor accessor = (WindowAccessor) (Object) CLIENT.getWindow();
 
         accessor.setWidth(width);

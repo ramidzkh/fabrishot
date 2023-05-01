@@ -32,5 +32,10 @@
   ],
   "license": [
     "MIT"
-  ]
+  ],
+  "contact": {
+    "homepage": "https://github.com/ramidzkh/fabrishot#readme",
+    "issues": "https://github.com/ramidzkh/fabrishot/issues",
+    "sources": "https://github.com/ramidzkh/fabrishot"
+  }
 }

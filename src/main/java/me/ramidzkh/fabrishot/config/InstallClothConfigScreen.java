@@ -24,10 +24,11 @@
 
 package me.ramidzkh.fabrishot.config;
 
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.NarratorManager;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 
 public class InstallClothConfigScreen extends Screen {
@@ -42,21 +43,19 @@ public class InstallClothConfigScreen extends Screen {
 
     @Override
     protected void init() {
-        addDrawableChild(new ButtonWidget((width - 50) / 2, height - 100, 50, 20, Text.of("Ok"), button -> removed()));
+        addDrawableChild(ButtonWidget.builder(ScreenTexts.OK, buttonWidget -> client.setScreen(parent))
+                .position(width / 2 - 100, height - 52)
+                .size(200, 20)
+                .build());
     }
 
     @Override
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        renderBackground(matrices);
+    public void render(DrawContext drawContext, int mouseX, int mouseY, float delta) {
+        renderBackground(drawContext);
 
         int textWidth = client.textRenderer.getWidth(INSTALL_CLOTH_CONFIG);
-        client.textRenderer.drawWithShadow(matrices, INSTALL_CLOTH_CONFIG, (width - textWidth) / 2F, height / 3F, 0xFFFFFFFF);
+        drawContext.drawTextWithShadow(client.textRenderer, INSTALL_CLOTH_CONFIG, (width - textWidth) / 2, height / 3, 0xFF0000);
 
-        super.render(matrices, mouseX, mouseY, delta);
-    }
-
-    @Override
-    public void removed() {
-        client.setScreen(parent);
+        super.render(drawContext, mouseX, mouseY, delta);
     }
 }

@@ -64,6 +64,11 @@ public class ClothConfigBridge implements ConfigScreenFactory<Screen> {
                 .setSaveConsumer(b -> Config.SAVE_FILE = b)
                 .build());
 
+        category.addEntry(entryBuilder.startBooleanToggle(Text.translatable("fabrishot.config.disable_gui_scaling"), Config.DISABLE_GUI_SCALING)
+                .setDefaultValue(false)
+                .setSaveConsumer(b -> Config.DISABLE_GUI_SCALING = b)
+                .build());
+
         category.addEntry(entryBuilder.startIntField(Text.translatable("fabrishot.config.width"), Config.CAPTURE_WIDTH)
                 .setDefaultValue(3840)
                 .setMin(1)

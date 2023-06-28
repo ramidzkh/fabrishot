@@ -50,6 +50,10 @@ public class CaptureTask {
     }
 
     public float getScaleFactor() {
+        if (Config.DISABLE_GUI_SCALING) {
+            return 1;
+        }
+
         if (MinecraftClient.getInstance().options.getGuiScale().getValue() == 0) {
             return 1;
         }

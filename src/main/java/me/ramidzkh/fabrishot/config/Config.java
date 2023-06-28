@@ -41,6 +41,7 @@ public class Config {
     public static boolean OVERRIDE_SCREENSHOT_KEY = false;
     public static boolean HIDE_HUD = false;
     public static boolean SAVE_FILE = true;
+    public static boolean DISABLE_GUI_SCALING = false;
     public static int CAPTURE_WIDTH = 3840;
     public static int CAPTURE_HEIGHT = 2160;
     public static int CAPTURE_DELAY = 3;
@@ -57,6 +58,7 @@ public class Config {
             Config.OVERRIDE_SCREENSHOT_KEY = Boolean.parseBoolean(properties.getProperty("override_screenshot_key"));
             Config.HIDE_HUD = Boolean.parseBoolean(properties.getProperty("hide_hud"));
             Config.SAVE_FILE = Boolean.parseBoolean(properties.getProperty("save_file"));
+            Config.DISABLE_GUI_SCALING = Boolean.parseBoolean(properties.getProperty("disable_gui_scaling"));
             Config.CAPTURE_WIDTH = Integer.parseInt(properties.getProperty("width"));
             Config.CAPTURE_HEIGHT = Integer.parseInt(properties.getProperty("height"));
             Config.CAPTURE_DELAY = Integer.parseInt(properties.getProperty("delay"));
@@ -72,6 +74,7 @@ public class Config {
         properties.put("override_screenshot_key", String.valueOf(Config.OVERRIDE_SCREENSHOT_KEY));
         properties.put("hide_hud", String.valueOf(Config.HIDE_HUD));
         properties.put("save_file", String.valueOf(Config.SAVE_FILE));
+        properties.put("disable_gui_scaling", String.valueOf(Config.DISABLE_GUI_SCALING));
         properties.put("width", String.valueOf(Config.CAPTURE_WIDTH));
         properties.put("height", String.valueOf(Config.CAPTURE_HEIGHT));
         properties.put("delay", String.valueOf(Config.CAPTURE_DELAY));

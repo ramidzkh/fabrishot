@@ -6,6 +6,7 @@
   "fabrishot.config.override_screenshot_key": "Override normal screenshot with Fabrishot",
   "fabrishot.config.hide_hud": "Automatically hide the HUD",
   "fabrishot.config.save_file": "Save the screenshot file",
+  "fabrishot.config.disable_gui_scaling": "Disable GUI scaling",
   "fabrishot.config.width": "Screenshot width",
   "fabrishot.config.height": "Screenshot height",
   "fabrishot.config.delay": "Capture delay",

@@ -6,6 +6,7 @@
   "fabrishot.config.override_screenshot_key": "用 Fabrishot 替换默认的截图功能",
   "fabrishot.config.hide_hud": "自动隐藏HUD",
   "fabrishot.config.save_file": "保存截图文件",
+  "fabrishot.config.disable_gui_scaling": "禁用GUI缩放",
   "fabrishot.config.width": "截图宽度",
   "fabrishot.config.height": "截图高度",
   "fabrishot.config.delay": "采集延迟",

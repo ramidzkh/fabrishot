@@ -1,0 +1,15 @@
+{
+  "fabrishot.config.title": "Fabrishot",
+  "fabrishot.config.category": "Cấu hình ảnh chụp màn hình",
+  "fabrishot.config.custom_file_name": "Sử dụng định dạng tên tệp khác",
+  "fabrishot.config.custom_file_name.tooltip": "Sử dụng %time% cho thời gian,\n %world% cho tên thế giới hoặc máy chủ",
+  "fabrishot.config.override_screenshot_key": "Ghi đè ảnh chụp màn hình bình thường bằng Fabrishot",
+  "fabrishot.config.hide_hud": "Tự động ẩn HUD",
+  "fabrishot.config.save_file": "Lưu tệp ảnh chụp màn hình",
+  "fabrishot.config.disable_gui_scaling": "Tắt mở rộng GUI",
+  "fabrishot.config.width": "Chiều rộng ảnh chụp màn hình",
+  "fabrishot.config.height": "Chiều cao ảnh chụp màn hình",
+  "fabrishot.config.delay": "Độ trễ chụp",
+  "fabrishot.config.delay.tooltip": "Số khung hình chờ sau khi thay đổi kích thước. Tinh chỉnh để hiển thị tốt hơn với shader",
+  "fabrishot.config.file_format": "Định dạng tệp",
+  "key.fabrishot.screenshot": "Chụp ảnh màn hình lớn"

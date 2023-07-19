@@ -3,11 +3,14 @@
   "fabrishot.config.category": "螢幕擷取畫面設定",
   "fabrishot.config.custom_file_name": "使用不同的檔案名稱格式",
   "fabrishot.config.custom_file_name.tooltip": "用 %time% 代替時間，\n用 %world% 代替世界或伺服器名稱",
-  "fabrishot.config.override_screenshot_key": "用 Fabrishot 覆蓋普通",
+  "fabrishot.config.override_screenshot_key": "用 Fabrishot 覆蓋一般螢幕擷取畫面",
+  "fabrishot.config.hide_hud": "自動隱藏 HUD",
   "fabrishot.config.save_file": "儲存螢幕擷取畫面檔案",
+  "fabrishot.config.disable_gui_scaling": "停用介面大小",
   "fabrishot.config.width": "螢幕擷取畫面寬度",
   "fabrishot.config.height": "螢幕擷取畫面高度",
   "fabrishot.config.delay": "螢幕擷取畫面延遲",
-  "fabrishot.config.delay.tooltip": "調整大小後等待幀數，使用光影包調整曝光以達到更好的效果",
+  "fabrishot.config.delay.tooltip": "調整大小後等待 FPS，使用光影包調整曝光以達到更好的效果",
+  "fabrishot.config.file_format": "檔案格式",
   "key.fabrishot.screenshot": "高解析度擷取螢幕畫面"
 }

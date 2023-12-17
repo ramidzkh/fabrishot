@@ -1,0 +1,13 @@
+{
+    "fabrishot.config.title": "Fabrishot",
+    "fabrishot.config.category": "Configuração da captura de tela",
+    "fabrishot.config.custom_file_name": "Usar formato de nome de arquivo diferente",
+    "fabrishot.config.custom_file_name.tooltip": "Use %time% para o tempo,\n %world% para o mundo ou nome do servidor",
+    "fabrishot.config.override_screenshot_key": "Substitua a captura de tela normal com Fabrishot",
+    "fabrishot.config.save_file": "Salve o arquivo de captura de tela",
+    "fabrishot.config.width": "Largura da captura de tela",
+    "fabrishot.config.height": "Altura da captura de tela",
+    "fabrishot.config.delay": "Atraso de captura",
+    "fabrishot.config.delay.tooltip": "Quadros para aguardar após o redimensionamento. Ajuste para melhor exposição com shaders",
+    "key.fabrishot.screenshot": "Captura de tela grande"
+}  

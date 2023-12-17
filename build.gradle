@@ -76,9 +76,7 @@ System.getenv("CURSEFORGE")?.with { String key ->
                 releaseType = "release"
             }
 
-            addGameVersion("1.19.2")
-            addGameVersion("1.19.1")
-            addGameVersion("1.19")
+            addGameVersion("1.20.1")
             addGameVersion("Fabric")
 
             mainArtifact(remapJar) {
@@ -111,7 +109,7 @@ modrinth {
     }
 
     uploadFile.set(remapJar)
-    gameVersions.addAll(["1.19.2", "1.19.1", "1.19"])
+    gameVersions.addAll(["1.20.1"])
 
     dependencies {
         required.project("fabric-api")

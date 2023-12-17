@@ -51,7 +51,7 @@ public class InstallClothConfigScreen extends Screen {
 
     @Override
     public void render(DrawContext drawContext, int mouseX, int mouseY, float delta) {
-        renderBackground(drawContext);
+        super.render(drawContext, mouseX, mouseY, delta);
 
         int textWidth = client.textRenderer.getWidth(INSTALL_CLOTH_CONFIG);
         drawContext.drawTextWithShadow(client.textRenderer, INSTALL_CLOTH_CONFIG, (width - textWidth) / 2, height / 3, 0xFF0000);

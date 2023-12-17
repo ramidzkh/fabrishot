@@ -28,13 +28,13 @@ repositories {
 }
 
 dependencies {
-    minecraft("net.minecraft:minecraft:1.20.1")
-    mappings("net.fabricmc:yarn:1.20.1+build.1")
-    modImplementation("net.fabricmc:fabric-loader:0.14.21")
+    minecraft("net.minecraft:minecraft:1.20.2")
+    mappings("net.fabricmc:yarn:1.20.2+build.1")
+    modImplementation("net.fabricmc:fabric-loader:0.15.2")
 
-    modImplementation("net.fabricmc.fabric-api:fabric-api:0.84.0+1.20.1")
-    modImplementation("com.terraformersmc:modmenu:7.1.0")
-    modImplementation("me.shedaniel.cloth:cloth-config-fabric:11.0.99")
+    modImplementation("net.fabricmc.fabric-api:fabric-api:0.91.2+1.20.2")
+    modImplementation("com.terraformersmc:modmenu:8.0.0")
+    modImplementation("me.shedaniel.cloth:cloth-config-fabric:12.0.113")
 }
 
 java {
@@ -76,7 +76,7 @@ System.getenv("CURSEFORGE")?.with { String key ->
                 releaseType = "release"
             }
 
-            addGameVersion("1.20.1")
+            addGameVersion("1.20.2")
             addGameVersion("Fabric")
 
             mainArtifact(remapJar) {
@@ -109,7 +109,7 @@ modrinth {
     }
 
     uploadFile.set(remapJar)
-    gameVersions.addAll(["1.20.1"])
+    gameVersions.addAll(["1.20.2"])
 
     dependencies {
         required.project("fabric-api")

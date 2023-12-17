@@ -1,13 +1,16 @@
 {
   "fabrishot.config.title": "Fabrishot",
-  "fabrishot.config.category": "Размеры скриншота",
-  "fabrishot.config.custom_file_name": "Use different filename format",
-  "fabrishot.config.custom_file_name.tooltip": "Use %time% for the time,\n %world% for world or server name",
-  "fabrishot.config.override_screenshot_key": "Заменить обычный скриншот с Fabrishot",
-  "fabrishot.config.save_file": "Save the screenshot file",
+  "fabrishot.config.category": "Настройки скриншота",
+  "fabrishot.config.custom_file_name": "Формат имени файла",
+  "fabrishot.config.custom_file_name.tooltip": "Используйте %time% для времени,\n%world% для имени мира или сервера",
+  "fabrishot.config.override_screenshot_key": "Заменить обычный скриншот на Fabrishot",
+  "fabrishot.config.hide_hud": "Автоматически скрывает интерфейс",
+  "fabrishot.config.save_file": "Сохранять файл скриншота",
+  "fabrishot.config.disable_gui_scaling": "Отключить масштабирование интерфейса",
   "fabrishot.config.width": "Ширина скриншота",
   "fabrishot.config.height": "Высота скриншота",
-  "fabrishot.config.delay": "Capture delay",
-  "fabrishot.config.delay.tooltip": "Frames to wait after resizing. Tweak for better exposure with shaders",
+  "fabrishot.config.delay": "Задержка скриншота",
+  "fabrishot.config.delay.tooltip": "Задержка кадров после изменения размера. Настройка для лучшей экспозиции шейдеров",
+  "fabrishot.config.file_format": "Формат файла",
   "key.fabrishot.screenshot": "Сделать большой скриншот"
 }

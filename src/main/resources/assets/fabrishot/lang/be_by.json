@@ -1,0 +1,16 @@
+{
+  "fabrishot.config.title": "Fabrishot",
+  "fabrishot.config.category": "Налады скрыншотаў",
+  "fabrishot.config.custom_file_name": "Выкарыстоўваць іншую назву файла",
+  "fabrishot.config.custom_file_name.tooltip": "Выкарыстоўваць %time% для часу,\n %world% для свету ці серверу",
+  "fabrishot.config.override_screenshot_key": "Перазапісаць звычайны скрыншот Fabrishot",
+  "fabrishot.config.hide_hud": "Аўтаматычна хаваць HUD",
+  "fabrishot.config.save_file": "Захаваць файл скрыншоту",
+  "fabrishot.config.disable_gui_scaling": "Адключыць маштабаванне GUI",
+  "fabrishot.config.width": "Щырыня скрыншоту",
+  "fabrishot.config.height": "Вышыня скрыншоту",
+  "fabrishot.config.delay": "Затрымка скрыншота",
+  "fabrishot.config.delay.tooltip": "Кадры, якія чакаюць пасля змены памеру. Наладзьце лепшую экспазіцыю з дапамогай шэйдараў",
+  "fabrishot.config.file_format": "Фармат файла",
+  "key.fabrishot.screenshot": "Зрабіць вялікі скрыншот"
+}

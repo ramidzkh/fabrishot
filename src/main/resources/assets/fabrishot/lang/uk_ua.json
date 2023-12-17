@@ -1,0 +1,13 @@
+{
+  "fabrishot.config.title": "Fabrishot",
+  "fabrishot.config.category": "Розмір знімку екрана",
+  "fabrishot.config.custom_file_name": "Використовувати інший формат назви файлу",
+  "fabrishot.config.custom_file_name.tooltip": "Умовні позначення:\n%time% - час створення знімку\n%world% - назва світу або серверу",
+  "fabrishot.config.override_screenshot_key": "Замінити стандартний знімок на Fabrishot",
+  "fabrishot.config.save_file": "Зберегти файл знімка",
+  "fabrishot.config.width": "Ширина знімка",
+  "fabrishot.config.height": "Висота знімка",
+  "fabrishot.config.delay": "Затримка знімка",
+  "fabrishot.config.delay.tooltip": "Кількість кадрів очікування після зміни розміру. Змінюйте цей параметр для кращої експозиції з шейдерами",
+  "key.fabrishot.screenshot": "Зробити великий знімок"
+}

@@ -120,4 +120,8 @@ public class Fabrishot {
             return 1;
         }
     }
+
+    public static boolean isInCapture() {
+        return task != null;
+    }
 }

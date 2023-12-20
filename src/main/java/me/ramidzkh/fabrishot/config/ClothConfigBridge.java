@@ -29,6 +29,7 @@ import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
+import me.shedaniel.clothconfig2.gui.entries.IntegerListEntry;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 
@@ -69,19 +70,23 @@ public class ClothConfigBridge implements ConfigScreenFactory<Screen> {
                 .setSaveConsumer(b -> Config.DISABLE_GUI_SCALING = b)
                 .build());
 
-        category.addEntry(entryBuilder.startIntField(Text.translatable("fabrishot.config.width"), Config.CAPTURE_WIDTH)
+        IntegerListEntry width = entryBuilder.startIntField(Text.translatable("fabrishot.config.width"), Config.CAPTURE_WIDTH)
                 .setDefaultValue(3840)
                 .setMin(1)
                 .setMax(Math.min(65535, RenderSystem.maxSupportedTextureSize()))
                 .setSaveConsumer(i -> Config.CAPTURE_WIDTH = i)
-                .build());
+                .build();
+        category.addEntry(width);
 
-        category.addEntry(entryBuilder.startIntField(Text.translatable("fabrishot.config.height"), Config.CAPTURE_HEIGHT)
+        IntegerListEntry height = entryBuilder.startIntField(Text.translatable("fabrishot.config.height"), Config.CAPTURE_HEIGHT)
                 .setDefaultValue(2160)
                 .setMin(1)
                 .setMax(Math.min(65535, RenderSystem.maxSupportedTextureSize()))
                 .setSaveConsumer(i -> Config.CAPTURE_HEIGHT = i)
-                .build());
+                .build();
+        category.addEntry(height);
+
+        category.addEntry(new ScalingPresetEntry(220, width, height));
 
         category.addEntry(entryBuilder.startIntField(Text.translatable("fabrishot.config.delay"), Config.CAPTURE_DELAY)
                 .setTooltip(Text.translatable("fabrishot.config.delay.tooltip"))

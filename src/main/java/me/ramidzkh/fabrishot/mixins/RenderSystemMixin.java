@@ -14,7 +14,7 @@ public class RenderSystemMixin {
     @Unique
     private static boolean wasLastFrameInCapture;
 
-    @Redirect(method = "flipFrame", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwSwapBuffers(J)V"))
+    @Redirect(method = "flipFrame", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwSwapBuffers(J)V"), remap = false)
     private static void glfwSwapBuffers(long window) {
         if (Fabrishot.isInCapture()) {
             wasLastFrameInCapture = true;

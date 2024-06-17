@@ -18,14 +18,14 @@
   "name": "Fabrishot",
   "description": "Take high resolution screenshots because why not",
   "depends": {
-    "minecraft": "1.20.6",
+    "minecraft": "1.21",
     "fabric-lifecycle-events-v1": "*",
     "fabric-key-binding-api-v1": "*"
   },
   "recommends": {
     "fabric-resource-loader-v0": "*",
-    "modmenu": ">=10.0.0-beta.1",
-    "cloth-config2": ">=14.0.126"
+    "modmenu": ">=11.0.0-rc.4",
+    "cloth-config2": ">=15.0.127"
   },
   "authors": [
     "ramidzkh"

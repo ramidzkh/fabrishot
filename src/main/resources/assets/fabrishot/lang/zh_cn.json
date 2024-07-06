@@ -1,16 +1,16 @@
 {
   "fabrishot.config.title": "Fabrishot",
-  "fabrishot.config.category": "截图尺寸",
+  "fabrishot.config.category": "截图配置",
   "fabrishot.config.custom_file_name": "使用不同的文件名格式",
-  "fabrishot.config.custom_file_name.tooltip": "使用%time%表示时间，\n%world%表示世界或服务器名字",
-  "fabrishot.config.override_screenshot_key": "用 Fabrishot 替换默认的截图功能",
-  "fabrishot.config.hide_hud": "自动隐藏HUD",
+  "fabrishot.config.custom_file_name.tooltip": "使用 %time% 来表示时间，\n使用 %world% 来表示世界或服务器名称。",
+  "fabrishot.config.override_screenshot_key": "使用 Fabrishot 替换原版默认的截图功能",
+  "fabrishot.config.hide_hud": "自动隐藏 HUD",
   "fabrishot.config.save_file": "保存截图文件",
-  "fabrishot.config.disable_gui_scaling": "禁用GUI缩放",
+  "fabrishot.config.disable_gui_scaling": "禁用界面尺寸缩放",
   "fabrishot.config.width": "截图宽度",
   "fabrishot.config.height": "截图高度",
-  "fabrishot.config.delay": "采集延迟",
-  "fabrishot.config.delay.tooltip": "调整大小后要等待的帧数。用光影进行调整以获得更好的曝光效果",
+  "fabrishot.config.delay": "截图延迟",
+  "fabrishot.config.delay.tooltip": "图像尺寸调整完毕后，在截图前需要等待的帧数。\n在使用光影时，若想在截图时获得更好的曝光效果，则需要调整该值。",
   "fabrishot.config.file_format": "文件格式",
   "key.fabrishot.screenshot": "截图（高分辨率）"
 }

@@ -1,0 +1,18 @@
+{
+  "fabrishot.config.title": "Fabrishot",
+  "fabrishot.config.category": "スクリーンショット設定",
+  "fabrishot.config.custom_file_name": "ファイル名テンプレート",
+  "fabrishot.config.custom_file_name.tooltip": "「%time%」は撮影日時に、「%world%」はワールド名またはサーバー名に置き換えられます。",
+  "fabrishot.config.override_screenshot_key": "通常のスクリーンショットを置き換える",
+  "fabrishot.config.hide_hud": "GUIを自動で隠す",
+  "fabrishot.config.save_file": "スクリーンショットをファイルに保存",
+  "fabrishot.config.disable_gui_scaling": "GUIを拡大しない",
+  "fabrishot.config.width": "スクリーンショットの幅",
+  "fabrishot.config.height": "スクリーンショットの高さ",
+  "fabrishot.config.delay": "露光フレーム数",
+  "fabrishot.config.delay.tooltip": "撮影前に待機するフレーム数。シェーダーの露出やボケを微調整できます。",
+  "fabrishot.config.file_format": "ファイル形式",
+  "key.fabrishot.screenshot": "高解像度スクリーンショットの撮影",	
+  "modmenu.summaryTranslation.fabrishot": "4Kスクリーンショット撮影",
+  "modmenu.descriptionTranslation.fabrishot": "モニターの解像度を超えて、高解像度のスクリーンショットを撮影できます。"
+}

@@ -1,0 +1,16 @@
+{
+  "fabrishot.config.title": "Fabrishot",
+  "fabrishot.config.category": "Screenshot configuratie",
+  "fabrishot.config.custom_file_name": "Gebruik een ander formaat voor bestandsnaam",
+  "fabrishot.config.custom_file_name.tooltip": "Gebruik %time% voor de tijd,\n %world% voor de naam van de wereld of server",
+  "fabrishot.config.override_screenshot_key": "Vervang normale screenshot met Fabrishot",
+  "fabrishot.config.hide_hud": "Verberg de HUD automatisch",
+  "fabrishot.config.save_file": "Sla het screenshotbestand op",
+  "fabrishot.config.disable_gui_scaling": "Zet GUI schaalvergroting uit",
+  "fabrishot.config.width": "Screenshot breedte",
+  "fabrishot.config.height": "Screenshot hoogte",
+  "fabrishot.config.delay": "Opname vertraging",
+  "fabrishot.config.delay.tooltip": "Frames te wachten na het wijzigen van de grootte. Verander voor betere belichting met shaders",
+  "fabrishot.config.file_format": "Bestandsformaat",
+  "key.fabrishot.screenshot": "Neem een grote screenshot"
+}

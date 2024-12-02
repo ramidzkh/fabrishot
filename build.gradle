@@ -7,6 +7,8 @@ plugins {
 group = "me.ramidzkh"
 version = System.getenv("FABRISHOT_VERSION") ?: "0.0.0"
 
+String minecraft_version = "1.21.3"
+
 repositories {
     maven {
         name = "TerraformersMC"
@@ -28,7 +30,7 @@ repositories {
 }
 
 dependencies {
-    minecraft("net.minecraft:minecraft:1.21.3")
+    minecraft("net.minecraft:minecraft:${minecraft_version}")
     mappings("net.fabricmc:yarn:1.21.3+build.2")
     modImplementation("net.fabricmc:fabric-loader:0.16.9")
 
@@ -49,11 +51,12 @@ tasks.withType(JavaCompile) {
 
 processResources {
     inputs.property("version", project.version)
+    inputs.property("minecraft_version", minecraft_version)
 
     from("LICENSE")
 
     filesMatching("fabric.mod.json") {
-        expand("version": project.version)
+        expand("version": project.version, "minecraft_version": minecraft_version)
     }
 }
 
@@ -76,7 +79,7 @@ System.getenv("CURSEFORGE")?.with { String key ->
                 releaseType = "release"
             }
 
-            addGameVersion("1.21")
+            addGameVersion(minecraft_version)
             addGameVersion("Fabric")
 
             mainArtifact(remapJar) {
@@ -109,7 +112,7 @@ modrinth {
     }
 
     uploadFile.set(remapJar)
-    gameVersions.addAll(["1.21"])
+    gameVersions.addAll([minecraft_version])
 
     dependencies {
         required.project("fabric-api")

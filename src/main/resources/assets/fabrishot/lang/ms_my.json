@@ -1,0 +1,16 @@
+{
+  "fabrishot.config.title": "Fabrishot",
+  "fabrishot.config.category": "Konfigurasi tangkapan layar",
+  "fabrishot.config.custom_file_name": "Gunakan format nama fail yang berbeza",
+  "fabrishot.config.custom_file_name.tooltip": "Gunakan %time% untuk masa,\n %world% untuk nama dunia atau pelayan",
+  "fabrishot.config.override_screenshot_key": "Gantikan tangkapan layar biasa dengan Fabrishot",
+  "fabrishot.config.hide_hud": "Sembunyikan HUD secara automatik",
+  "fabrishot.config.save_file": "Simpan fail tangkapan layar",
+  "fabrishot.config.disable_gui_scaling": "Nyahdayakan penskalaan GUI",
+  "fabrishot.config.width": "Lebar tangkapan layar",
+  "fabrishot.config.height": "Tinggi tangkapan layar",
+  "fabrishot.config.delay": "Kelewatan tangkapan",
+  "fabrishot.config.delay.tooltip": "Bilangan bingkai untuk menunggu selepas saiz semula. Ubah untuk pendedahan yang lebih baik dengan pembayang",
+  "fabrishot.config.file_format": "Format fail",
+  "key.fabrishot.screenshot": "Ambil tangkapan layar besar"
+}

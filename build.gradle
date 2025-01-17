@@ -7,7 +7,7 @@ plugins {
 group = "me.ramidzkh"
 version = System.getenv("FABRISHOT_VERSION") ?: "0.0.0"
 
-String minecraft_version = "1.21.3"
+String minecraft_version = "1.21.4"
 
 repositories {
     maven {
@@ -31,12 +31,12 @@ repositories {
 
 dependencies {
     minecraft("net.minecraft:minecraft:${minecraft_version}")
-    mappings("net.fabricmc:yarn:1.21.3+build.2")
-    modImplementation("net.fabricmc:fabric-loader:0.16.9")
+    mappings("net.fabricmc:yarn:1.21.4+build.8")
+    modImplementation("net.fabricmc:fabric-loader:0.16.10")
 
-    modImplementation("net.fabricmc.fabric-api:fabric-api:0.110.0+1.21.3")
-    modImplementation("com.terraformersmc:modmenu:12.0.0-beta.1")
-    modImplementation("me.shedaniel.cloth:cloth-config-fabric:16.0.141")
+    modImplementation("net.fabricmc.fabric-api:fabric-api:0.114.3+1.21.4")
+    modImplementation("com.terraformersmc:modmenu:13.0.0")
+    modImplementation("me.shedaniel.cloth:cloth-config-fabric:17.0.144")
 }
 
 java {

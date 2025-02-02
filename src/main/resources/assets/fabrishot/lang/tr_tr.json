@@ -1,0 +1,16 @@
+{
+  "fabrishot.config.title": "Fabrishot",
+  "fabrishot.config.category": "Ekran görüntüsü ayarları",
+  "fabrishot.config.custom_file_name": "Başka dosya ismi formatı kullan",
+  "fabrishot.config.custom_file_name.tooltip": "Zaman için %time%,\n dünya ya da sunucu adı için %world% kullanın",
+  "fabrishot.config.override_screenshot_key": "Normal ekran görüntüsünü Fabrishot ile değiştir",
+  "fabrishot.config.hide_hud": "HUD'ı otomatik olarak gizle",
+  "fabrishot.config.save_file": "Ekran görüntüsü dosyasını kaydet",
+  "fabrishot.config.disable_gui_scaling": "Arayüz ölçeğini kapat",
+  "fabrishot.config.width": "Ekran görüntüsü eni",
+  "fabrishot.config.height": "Ekran görüntüsü boyu",
+  "fabrishot.config.delay": "Yakalama gecikmesi",
+  "fabrishot.config.delay.tooltip": "Yeniden boyutlandırmadan sonra beklenecek kare. Shaderlar ile daha iyi pozlama için kurcalayabilirsiniz",
+  "fabrishot.config.file_format": "Dosya formatı",
+  "key.fabrishot.screenshot": "Büyük Ekran Görüntüsü Alma"
+}

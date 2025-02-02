@@ -1,0 +1,16 @@
+{
+  "fabrishot.config.title": "Fabrishot",
+  "fabrishot.config.category": "Skärmdumps konfiguration",
+  "fabrishot.config.custom_file_name": "Använd ett annat filfromat",
+  "fabrishot.config.custom_file_name.tooltip": "Använd %time% för tid,\n %world% för värld eller servernamn",
+  "fabrishot.config.override_screenshot_key": "Override normal screenshot with Fabrishot",
+  "fabrishot.config.hide_hud": "Göm HUD automatiskt",
+  "fabrishot.config.save_file": "Spara skärmdumpsfilen",
+  "fabrishot.config.disable_gui_scaling": "Disable GUI scaling",
+  "fabrishot.config.width": "Skärmdumpsbredd",
+  "fabrishot.config.height": "Skärmdumpshöjd",
+  "fabrishot.config.delay": "Fördröjning för bild",
+  "fabrishot.config.delay.tooltip": "Frames att vänta efter resizing. Ändra för bättre exponering med shaders",
+  "fabrishot.config.file_format": "Filformat",
+  "key.fabrishot.screenshot": "Ta stor skärmdump"
+}

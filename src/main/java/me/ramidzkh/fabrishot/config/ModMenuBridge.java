@@ -26,6 +26,7 @@ package me.ramidzkh.fabrishot.config;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
+import dev.newty.fabrishotplus.config.ClothConfigBridge;
 import net.fabricmc.loader.api.FabricLoader;
 
 public class ModMenuBridge implements ModMenuApi {

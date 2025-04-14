@@ -24,6 +24,7 @@
 
 package me.ramidzkh.fabrishot.config;
 
+import dev.newty.fabrishotplus.config.PlusConfig;
 import me.ramidzkh.fabrishot.Fabrishot;
 import net.fabricmc.loader.api.FabricLoader;
 import org.apache.logging.log4j.LogManager;
@@ -63,6 +64,7 @@ public class Config {
             Config.CAPTURE_HEIGHT = Integer.parseInt(properties.getProperty("height"));
             Config.CAPTURE_DELAY = Integer.parseInt(properties.getProperty("delay"));
             Config.CAPTURE_FILE_FORMAT = FileFormat.valueOf(properties.getProperty("file_format"));
+            PlusConfig.SHOW_NAMETAGS = Boolean.parseBoolean(properties.getProperty("show_nametags"));
         } catch (Exception ignored) {
             save();
         }
@@ -70,6 +72,7 @@ public class Config {
 
     static void save() {
         Properties properties = new Properties();
+        PlusConfig.save(properties);
         properties.put("custom_file_name", Config.CUSTOM_FILE_NAME);
         properties.put("override_screenshot_key", String.valueOf(Config.OVERRIDE_SCREENSHOT_KEY));
         properties.put("hide_hud", String.valueOf(Config.HIDE_HUD));

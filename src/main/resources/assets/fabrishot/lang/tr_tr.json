@@ -1,6 +1,5 @@
 {
   "fabrishot.config.title": "Fabrishot",
-  "fabrishot.config.category": "Ekran görüntüsü ayarları",
   "fabrishot.config.custom_file_name": "Başka dosya ismi formatı kullan",
   "fabrishot.config.custom_file_name.tooltip": "Zaman için %time%,\n dünya ya da sunucu adı için %world% kullanın",
   "fabrishot.config.override_screenshot_key": "Normal ekran görüntüsünü Fabrishot ile değiştir",

@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.newty.fabrishotplus.mixins",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "RenderNametagMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

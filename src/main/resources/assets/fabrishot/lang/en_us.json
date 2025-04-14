@@ -1,6 +1,5 @@
 {
   "fabrishot.config.title": "Fabrishot",
-  "fabrishot.config.category": "Screenshot configuration",
   "fabrishot.config.custom_file_name": "Use different filename format",
   "fabrishot.config.custom_file_name.tooltip": "Use %time% for the time,\n %world% for world or server name",
   "fabrishot.config.override_screenshot_key": "Override normal screenshot with Fabrishot",

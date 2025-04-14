@@ -5,7 +5,8 @@
   "icon": "assets/fabrishot/icon.png",
   "environment": "client",
   "mixins": [
-    "mixins.fabrishot.json"
+    "mixins.fabrishot.json",
+    "mixins.fabrishotplus.json"
   ],
   "entrypoints": {
     "main": [
@@ -15,8 +16,8 @@
       "me.ramidzkh.fabrishot.config.ModMenuBridge"
     ]
   },
-  "name": "Fabrishot",
-  "description": "Take high resolution screenshots because why not",
+  "name": "Fabrishot+",
+  "description": "Take high resolution screenshots because why not + more",
   "depends": {
     "minecraft": ">=${minecraft_version}",
     "fabric-lifecycle-events-v1": "*",
@@ -28,14 +29,15 @@
     "cloth-config2": ">=17.0.0"
   },
   "authors": [
+    "newtykip",
     "ramidzkh"
   ],
   "license": [
     "MIT"
   ],
   "contact": {
-    "homepage": "https://github.com/ramidzkh/fabrishot#readme",
-    "issues": "https://github.com/ramidzkh/fabrishot/issues",
-    "sources": "https://github.com/ramidzkh/fabrishot"
+    "homepage": "https://github.com/newtykip/fabrishot#readme",
+    "issues": "https://github.com/newtykip/fabrishot/issues",
+    "sources": "https://github.com/newtykip/fabrishot"
   }
 }

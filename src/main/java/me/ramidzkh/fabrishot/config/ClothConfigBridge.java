@@ -33,16 +33,15 @@ import me.shedaniel.clothconfig2.gui.entries.IntegerListEntry;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 
-public class ClothConfigBridge implements ConfigScreenFactory<Screen> {
+public class ClothConfigBridge {
 
-    @Override
-    public Screen create(Screen parent) {
+    public ConfigBuilder create(Screen parent) {
         ConfigBuilder builder = ConfigBuilder.create()
                 .setTitle(Text.translatable("fabrishot.config.title"))
                 .setSavingRunnable(Config::save)
                 .setParentScreen(parent);
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
-        ConfigCategory category = builder.getOrCreateCategory(Text.translatable("fabrishot.config.category"));
+        ConfigCategory category = builder.getOrCreateCategory(Text.translatable("fabrishot.config.title"));
 
         category.addEntry(entryBuilder.startStrField(Text.translatable("fabrishot.config.custom_file_name"), Config.CUSTOM_FILE_NAME)
                 .setTooltip(Text.translatable("fabrishot.config.custom_file_name.tooltip"))
@@ -100,6 +99,6 @@ public class ClothConfigBridge implements ConfigScreenFactory<Screen> {
                 .setSaveConsumer(t -> Config.CAPTURE_FILE_FORMAT = t)
                 .build());
 
-        return builder.build();
+        return builder;
     }
 }

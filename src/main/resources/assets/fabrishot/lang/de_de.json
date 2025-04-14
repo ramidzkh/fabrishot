@@ -1,6 +1,5 @@
 {
   "fabrishot.config.title": "Fabrishot",
-  "fabrishot.config.category": "Screenshot Größe",
   "fabrishot.config.custom_file_name": "Anderes Dateinamenformat verwenden",
   "fabrishot.config.custom_file_name.tooltip": "Verwende %time% für die Uhrzeit,\n %world% für den Welt- oder Server Bild-namen",
   "fabrishot.config.override_screenshot_key": "Normalen Screenshot mit Fabrishot überschreiben",

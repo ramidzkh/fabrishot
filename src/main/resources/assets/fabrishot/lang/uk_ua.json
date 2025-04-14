@@ -1,6 +1,5 @@
 {
   "fabrishot.config.title": "Fabrishot",
-  "fabrishot.config.category": "Розмір знімку екрана",
   "fabrishot.config.custom_file_name": "Використовувати інший формат назви файлу",
   "fabrishot.config.custom_file_name.tooltip": "Умовні позначення:\n%time% - час створення знімку\n%world% - назва світу або серверу",
   "fabrishot.config.override_screenshot_key": "Замінити стандартний знімок на Fabrishot",

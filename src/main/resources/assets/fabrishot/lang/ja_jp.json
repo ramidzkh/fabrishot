@@ -1,6 +1,5 @@
 {
   "fabrishot.config.title": "Fabrishot",
-  "fabrishot.config.category": "スクリーンショット設定",
   "fabrishot.config.custom_file_name": "ファイル名テンプレート",
   "fabrishot.config.custom_file_name.tooltip": "「%time%」は撮影日時に、「%world%」はワールド名またはサーバー名に置き換えられます。",
   "fabrishot.config.override_screenshot_key": "通常のスクリーンショットを置き換える",

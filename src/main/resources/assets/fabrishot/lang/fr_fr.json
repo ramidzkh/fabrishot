@@ -1,6 +1,5 @@
 {
   "fabrishot.config.title": "Fabrishot",
-  "fabrishot.config.category": "Configuration de capture d'écran",
   "fabrishot.config.custom_file_name": "Utiliser un format de nom de fichier différent",
   "fabrishot.config.custom_file_name.tooltip": "Utilisez %time% pour l'heure,\n %world% pour le monde ou le nom du serveur",
   "fabrishot.config.override_screenshot_key": "Remplacer la capture d'écran normale par Fabrishot",

@@ -1,6 +1,5 @@
 {
   "fabrishot.config.title": "Fabrishot",
-  "fabrishot.config.category": "Skärmdumps konfiguration",
   "fabrishot.config.custom_file_name": "Använd ett annat filfromat",
   "fabrishot.config.custom_file_name.tooltip": "Använd %time% för tid,\n %world% för värld eller servernamn",
   "fabrishot.config.override_screenshot_key": "Override normal screenshot with Fabrishot",

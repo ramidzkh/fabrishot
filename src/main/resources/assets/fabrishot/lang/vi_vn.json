@@ -1,6 +1,5 @@
 {
   "fabrishot.config.title": "Fabrishot",
-  "fabrishot.config.category": "Cấu hình ảnh chụp màn hình",
   "fabrishot.config.custom_file_name": "Sử dụng định dạng tên tệp khác",
   "fabrishot.config.custom_file_name.tooltip": "Sử dụng %time% cho thời gian,\n %world% cho tên thế giới hoặc máy chủ",
   "fabrishot.config.override_screenshot_key": "Ghi đè ảnh chụp màn hình bình thường bằng Fabrishot",

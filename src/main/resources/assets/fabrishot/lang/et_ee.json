@@ -1,6 +1,5 @@
 {
   "fabrishot.config.title": "Fabrishot",
-  "fabrishot.config.category": "Kuvatõmmise suurus",
   "fabrishot.config.custom_file_name": "Use different filename format",
   "fabrishot.config.custom_file_name.tooltip": "Use %time% for the time,\n %world% for world or server name",
   "fabrishot.config.override_screenshot_key": "Tee tavalise kuvatõmmise asemel Fabrishoti kuvatõmmis",

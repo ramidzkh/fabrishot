@@ -1,6 +1,5 @@
 {
   "fabrishot.config.title": "Fabrishot",
-  "fabrishot.config.category": "螢幕擷取畫面設定",
   "fabrishot.config.custom_file_name": "使用不同的檔案名稱格式",
   "fabrishot.config.custom_file_name.tooltip": "用 %time% 代替時間，\n用 %world% 代替世界或伺服器名稱",
   "fabrishot.config.override_screenshot_key": "用 Fabrishot 覆蓋一般螢幕擷取畫面",

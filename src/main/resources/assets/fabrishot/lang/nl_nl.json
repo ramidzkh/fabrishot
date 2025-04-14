@@ -1,6 +1,5 @@
 {
   "fabrishot.config.title": "Fabrishot",
-  "fabrishot.config.category": "Screenshot configuratie",
   "fabrishot.config.custom_file_name": "Gebruik een ander formaat voor bestandsnaam",
   "fabrishot.config.custom_file_name.tooltip": "Gebruik %time% voor de tijd,\n %world% voor de naam van de wereld of server",
   "fabrishot.config.override_screenshot_key": "Vervang normale screenshot met Fabrishot",

@@ -73,7 +73,7 @@ public class ClothConfigBridge implements ConfigScreenFactory<Screen> {
         IntegerListEntry width = entryBuilder.startIntField(Text.translatable("fabrishot.config.width"), Config.CAPTURE_WIDTH)
                 .setDefaultValue(3840)
                 .setMin(1)
-                .setMax(Math.min(65535, RenderSystem.maxSupportedTextureSize()))
+                .setMax(Math.min(65535, RenderSystem.getDevice().getMaxTextureSize()))
                 .setSaveConsumer(i -> Config.CAPTURE_WIDTH = i)
                 .build();
         category.addEntry(width);
@@ -81,7 +81,7 @@ public class ClothConfigBridge implements ConfigScreenFactory<Screen> {
         IntegerListEntry height = entryBuilder.startIntField(Text.translatable("fabrishot.config.height"), Config.CAPTURE_HEIGHT)
                 .setDefaultValue(2160)
                 .setMin(1)
-                .setMax(Math.min(65535, RenderSystem.maxSupportedTextureSize()))
+                .setMax(Math.min(65535, RenderSystem.getDevice().getMaxTextureSize()))
                 .setSaveConsumer(i -> Config.CAPTURE_HEIGHT = i)
                 .build();
         category.addEntry(height);

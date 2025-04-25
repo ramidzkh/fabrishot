@@ -57,14 +57,14 @@ public class Fabrishot {
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss");
     private static CaptureTask task;
 
-    private static void printFileLink(File file) {
-        Text text = Text.literal(file.getName()).formatted(Formatting.UNDERLINE).styled(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, file.getAbsolutePath())));
+    private static void printFileLink(Path path) {
+        Text text = Text.literal(path.toFile().getName()).formatted(Formatting.UNDERLINE).styled(style -> style.withClickEvent(new ClickEvent.OpenFile(path)));
         MinecraftClient.getInstance().execute(() -> MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(Text.translatable("screenshot.success", text)));
     }
 
     public static void initialize() {
         KeyBindingHelper.registerKeyBinding(SCREENSHOT_BINDING);
-        ScreenshotSaveCallback.EVENT.register(path -> Fabrishot.printFileLink(path.toFile()));
+        ScreenshotSaveCallback.EVENT.register(Fabrishot::printFileLink);
     }
 
     public static void startCapture() {

@@ -46,11 +46,11 @@ public interface MinecraftInterface {
     }
 
     static int getDisplayWidth() {
-        return CLIENT.getWindow().getWidth();
+        return CLIENT.getWindow().getFramebufferWidth();
     }
 
     static int getDisplayHeight() {
-        return CLIENT.getWindow().getHeight();
+        return CLIENT.getWindow().getFramebufferHeight();
     }
 
     static void writeFramebuffer(ByteBuffer pb, int bpp) {

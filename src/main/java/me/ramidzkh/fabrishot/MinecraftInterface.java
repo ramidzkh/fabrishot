@@ -37,8 +37,12 @@ public interface MinecraftInterface {
     static void resize(int width, int height) {
         WindowAccessor accessor = (WindowAccessor) (Object) CLIENT.getWindow();
 
-        accessor.setWidth(width);
-        accessor.setHeight(height);
+        int windowWidth = (int) ((float) width * ((float) CLIENT.getWindow().getWidth() / getDisplayWidth()));
+        int windowHeight = (int) ((float) height * ((float) CLIENT.getWindow().getHeight() / getDisplayHeight()));
+
+        accessor.setWidth(windowWidth);
+        accessor.setHeight(windowHeight);
+
         accessor.setFramebufferWidth(width);
         accessor.setFramebufferHeight(height);
 

@@ -26,6 +26,7 @@ package me.ramidzkh.fabrishot.capture;
 
 import me.ramidzkh.fabrishot.config.Config;
 import me.ramidzkh.fabrishot.event.ScreenshotSaveCallback;
+import net.minecraft.client.texture.NativeImage;
 import org.lwjgl.stb.STBIWriteCallback;
 import org.lwjgl.stb.STBImageWrite;
 
@@ -39,37 +40,22 @@ import java.nio.file.StandardOpenOption;
 
 public class FramebufferWriter {
 
-    protected final FramebufferCapturer fbc;
-    protected final Path file;
-
-    public FramebufferWriter(Path file, FramebufferCapturer fbc) {
-        this.file = file;
-        this.fbc = fbc;
-    }
-
-    public void write() throws IOException {
-        try (FileChannel fc = FileChannel.open(file, StandardOpenOption.CREATE, StandardOpenOption.WRITE)) {
-            writeImage(fc);
-        }
-
-        ScreenshotSaveCallback.EVENT.invoker().onSaved(file);
-    }
-
-    private void writeImage(FileChannel fc) throws IOException {
-        Dimension dim = fbc.getCaptureDimension();
-
-        try (WriteCallback callback = new WriteCallback(fc)) {
+    public static void write(NativeImage image, Path file) throws IOException {
+        try (FileChannel fc = FileChannel.open(file, StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+             WriteCallback callback = new WriteCallback(fc)) {
             switch (Config.CAPTURE_FILE_FORMAT) {
-                case PNG -> STBImageWrite.stbi_write_png_to_func(callback, 0L, dim.width(), dim.height(), fbc.getChannelCount(), fbc.getDataBuffer(), 0);
-                case JPG -> STBImageWrite.stbi_write_jpg_to_func(callback, 0L, dim.width(), dim.height(), fbc.getChannelCount(), fbc.getDataBuffer(), 90);
-                case TGA -> STBImageWrite.stbi_write_tga_to_func(callback, 0L, dim.width(), dim.height(), fbc.getChannelCount(), fbc.getDataBuffer());
-                case BMP -> STBImageWrite.stbi_write_bmp_to_func(callback, 0L, dim.width(), dim.height(), fbc.getChannelCount(), fbc.getDataBuffer());
+                case PNG -> STBImageWrite.nstbi_write_png_to_func(callback.address(), 0L, image.getWidth(), image.getHeight(), image.getFormat().getChannelCount(), image.imageId(), 0);
+                case JPG -> STBImageWrite.nstbi_write_jpg_to_func(callback.address(), 0L, image.getWidth(), image.getHeight(), image.getFormat().getChannelCount(), image.imageId(), 90);
+                case TGA -> STBImageWrite.nstbi_write_tga_to_func(callback.address(), 0L, image.getWidth(), image.getHeight(), image.getFormat().getChannelCount(), image.imageId());
+                case BMP -> STBImageWrite.nstbi_write_bmp_to_func(callback.address(), 0L, image.getWidth(), image.getHeight(), image.getFormat().getChannelCount(), image.imageId());
             }
 
             if (callback.exception != null) {
                 throw callback.exception;
             }
         }
+
+        ScreenshotSaveCallback.EVENT.invoker().onSaved(file);
     }
 
     private static class WriteCallback extends STBIWriteCallback implements AutoCloseable, Closeable {

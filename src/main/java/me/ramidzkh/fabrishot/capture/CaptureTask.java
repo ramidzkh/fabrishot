@@ -24,9 +24,9 @@
 
 package me.ramidzkh.fabrishot.capture;
 
-import me.ramidzkh.fabrishot.MinecraftInterface;
 import me.ramidzkh.fabrishot.config.Config;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.util.ScreenshotRecorder;
 import net.minecraft.util.Util;
 
 import java.io.IOException;
@@ -35,71 +35,41 @@ import java.nio.file.Path;
 public class CaptureTask {
 
     private final Path file;
-
-    private int frame;
-    private int displayWidth;
-    private int displayHeight;
     private boolean hudHidden;
+    private int frame;
+    private boolean saving;
+    private boolean savingDone;
 
     public CaptureTask(Path file) {
         this.file = file;
     }
 
-    public Path getFile() {
-        return file;
-    }
-
-    public float getScaleFactor() {
-        if (Config.DISABLE_GUI_SCALING) {
-            return 1;
-        }
-
-        if (MinecraftClient.getInstance().options.getGuiScale().getValue() == 0) {
-            return 1;
-        }
-
-        // might want to revisit this for weird screenshot resolutions
-        return Math.min((float) MinecraftInterface.getDisplayWidth() / displayWidth, (float) MinecraftInterface.getDisplayHeight() / displayHeight);
-    }
-
     public boolean onRenderTick() {
-        // override viewport size (the following frame will be black)
         if (frame == 0) {
-            displayWidth = MinecraftInterface.getDisplayWidth();
-            displayHeight = MinecraftInterface.getDisplayHeight();
             hudHidden = MinecraftClient.getInstance().options.hudHidden;
-
-            int width = Config.CAPTURE_WIDTH;
-            int height = Config.CAPTURE_HEIGHT;
-
-            // resize viewport/framebuffer
-            MinecraftInterface.resize(width, height);
             MinecraftClient.getInstance().options.hudHidden |= Config.HIDE_HUD;
-        } else if (frame >= Config.CAPTURE_DELAY) {
-            // capture screenshot and restore viewport size
-            try {
-                FramebufferCapturer fbc = new FramebufferCapturer();
-                fbc.capture();
+            frame++;
+        } else if (frame < Config.CAPTURE_DELAY) {
+            frame++;
+        } else if (saving) {
+            MinecraftClient.getInstance().options.hudHidden = hudHidden;
+            return savingDone;
+        } else {
+            saving = true;
 
-                if (Config.SAVE_FILE) {
-                    Util.getIoWorkerExecutor().execute(() -> {
-                        FramebufferWriter fbw = new FramebufferWriter(file, fbc);
+            ScreenshotRecorder.takeScreenshot(MinecraftClient.getInstance().getFramebuffer(), nativeImage -> {
+                savingDone = true;
 
-                        try {
-                            fbw.write();
-                        } catch (IOException exception) {
-                            exception.printStackTrace();
-                        }
-                    });
-                }
-            } finally {
-                // restore viewport/framebuffer
-                MinecraftInterface.resize(displayWidth, displayHeight);
-                MinecraftClient.getInstance().options.hudHidden = hudHidden;
-            }
+                Util.getIoWorkerExecutor().execute(() -> {
+                    try (nativeImage) {
+                        FramebufferWriter.write(nativeImage, file);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+            });
         }
 
-        frame++;
-        return frame > Config.CAPTURE_DELAY;
+        return false;
     }
 }

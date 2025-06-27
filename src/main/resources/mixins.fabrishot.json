@@ -6,8 +6,7 @@
   "mixins": [
     "KeyboardMixin",
     "MinecraftClientMixin",
-    "RenderSystemMixin",
-    "WindowAccessor"
+    "WindowMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -24,30 +24,12 @@
 
 package me.ramidzkh.fabrishot;
 
-import me.ramidzkh.fabrishot.mixins.WindowAccessor;
 import net.minecraft.client.MinecraftClient;
-import org.lwjgl.opengl.GL11;
-
-import java.nio.ByteBuffer;
+import net.minecraft.client.util.Window;
 
 public interface MinecraftInterface {
 
     MinecraftClient CLIENT = MinecraftClient.getInstance();
-
-    static void resize(int width, int height) {
-        WindowAccessor accessor = (WindowAccessor) (Object) CLIENT.getWindow();
-
-        int windowWidth = (int) ((float) width * ((float) CLIENT.getWindow().getWidth() / getDisplayWidth()));
-        int windowHeight = (int) ((float) height * ((float) CLIENT.getWindow().getHeight() / getDisplayHeight()));
-
-        accessor.setWidth(windowWidth);
-        accessor.setHeight(windowHeight);
-
-        accessor.setFramebufferWidth(width);
-        accessor.setFramebufferHeight(height);
-
-        CLIENT.onResolutionChanged();
-    }
 
     static int getDisplayWidth() {
         return CLIENT.getWindow().getFramebufferWidth();
@@ -57,28 +39,11 @@ public interface MinecraftInterface {
         return CLIENT.getWindow().getFramebufferHeight();
     }
 
-    static void writeFramebuffer(ByteBuffer pb, int bpp) {
-        GL11.glReadPixels(0, 0, getDisplayWidth(), getDisplayHeight(), GL11.GL_RGB, GL11.GL_UNSIGNED_BYTE, pb);
+    static void refresh() {
+        var framebuffer = MinecraftClient.getInstance().getFramebuffer();
+        if (framebuffer == null) return;
 
-        byte[] line1 = new byte[getDisplayWidth() * bpp];
-        byte[] line2 = new byte[getDisplayWidth() * bpp];
-
-        // flip buffer vertically
-        for (int i = 0; i < getDisplayHeight() / 2; i++) {
-            int ofs1 = i * getDisplayWidth() * bpp;
-            int ofs2 = (getDisplayHeight() - i - 1) * getDisplayWidth() * bpp;
-
-            // read lines
-            pb.position(ofs1);
-            pb.get(line1);
-            pb.position(ofs2);
-            pb.get(line2);
-
-            // write lines at swapped positions
-            pb.position(ofs2);
-            pb.put(line1);
-            pb.position(ofs1);
-            pb.put(line2);
-        }
+        Window window = MinecraftClient.getInstance().getWindow();
+        framebuffer.resize(window.getWidth(), window.getHeight());
     }
 }

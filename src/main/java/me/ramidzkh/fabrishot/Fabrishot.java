@@ -34,17 +34,13 @@ import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.ClickEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Util;
 import org.lwjgl.glfw.GLFW;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 public class Fabrishot {
 
@@ -54,7 +50,6 @@ public class Fabrishot {
             GLFW.GLFW_KEY_F9,
             "key.categories.misc");
 
-    private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss");
     private static CaptureTask task;
 
     private static void printFileLink(Path path) {
@@ -70,12 +65,14 @@ public class Fabrishot {
     public static void startCapture() {
         if (task == null) {
             task = new CaptureTask(getScreenshotFile(MinecraftClient.getInstance()));
+            MinecraftInterface.refresh();
         }
     }
 
     public static void onRenderPreOrPost() {
         if (task != null && task.onRenderTick()) {
             task = null;
+            MinecraftInterface.refresh();
         }
     }
 
@@ -90,7 +87,7 @@ public class Fabrishot {
             throw new UncheckedIOException(ex);
         }
 
-        String world = "";
+        String world = null;
 
         if (client.getServer() != null) {
             world = client.getServer().getSaveProperties().getLevelName();
@@ -100,25 +97,17 @@ public class Fabrishot {
 
         Path file;
         String prefix = Config.CUSTOM_FILE_NAME
-                .replace("%time%", DATE_FORMAT.format(new Date()))
-                .replace("%world%", world);
+                .replace("%time%", Util.getFormattedCurrentTime())
+                .replace("%world%", world != null ? world : "no_world");
 
         // loop though suffixes while the file exists
         int i = 1;
 
         do {
-            file = dir.resolve(prefix + (i++ == 1 ? "" : "_" + i) + '.' + Config.CAPTURE_FILE_FORMAT.name().toLowerCase(Locale.ROOT));
+            file = dir.resolve(prefix + (i++ == 1 ? "" : "_" + i) + Config.CAPTURE_FILE_FORMAT.extension());
         } while (Files.exists(file));
 
         return file;
-    }
-
-    public static float getScaleFactor() {
-        if (task != null) {
-            return task.getScaleFactor();
-        } else {
-            return 1;
-        }
     }
 
     public static boolean isInCapture() {

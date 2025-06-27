@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2021 Ramid Khan
+ * Copyright (c) 2025 Ramid Khan
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,17 +25,39 @@
 package me.ramidzkh.fabrishot.mixins;
 
 import me.ramidzkh.fabrishot.Fabrishot;
-import net.minecraft.client.MinecraftClient;
+import me.ramidzkh.fabrishot.MinecraftInterface;
+import me.ramidzkh.fabrishot.config.Config;
+import net.minecraft.client.util.Window;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(MinecraftClient.class)
-public class MinecraftClientMixin {
+@Mixin(Window.class)
+public class WindowMixin {
 
-    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/GameRenderer;render(Lnet/minecraft/client/render/RenderTickCounter;Z)V", shift = At.Shift.AFTER))
-    private void postRender(CallbackInfo callbackInfo) {
-        Fabrishot.onRenderPreOrPost();
+    @Inject(method = "getWidth", at = @At("RETURN"), cancellable = true)
+    private void scaleWidth(CallbackInfoReturnable<Integer> cir) {
+        if (Fabrishot.isInCapture()) {
+            cir.setReturnValue(Config.CAPTURE_WIDTH);
+        }
+    }
+
+    @Inject(method = "getHeight", at = @At("RETURN"), cancellable = true)
+    private void scaleHeight(CallbackInfoReturnable<Integer> cir) {
+        if (Fabrishot.isInCapture()) {
+            cir.setReturnValue(Config.CAPTURE_HEIGHT);
+        }
+    }
+
+    // todo: fix gui scaling (or is that needed anymore?)
+    //  @Inject(method = "getScaleFactor", at = @At("RETURN"), cancellable = true)
+    //  private void scaleScale(CallbackInfoReturnable<Double> cir) {
+    //  }
+
+    @Inject(method = {"onFramebufferSizeChanged", "updateFramebufferSize"}, at = @At("RETURN"))
+    private void onResize(CallbackInfo ci) {
+        MinecraftInterface.refresh();
     }
 }

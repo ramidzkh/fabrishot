@@ -37,8 +37,6 @@ public class CaptureTask {
     private final Path file;
     private boolean hudHidden;
     private int frame;
-    private boolean saving;
-    private boolean savingDone;
 
     public CaptureTask(Path file) {
         this.file = file;
@@ -49,17 +47,12 @@ public class CaptureTask {
             hudHidden = MinecraftClient.getInstance().options.hudHidden;
             MinecraftClient.getInstance().options.hudHidden |= Config.HIDE_HUD;
             frame++;
+            return false;
         } else if (frame < Config.CAPTURE_DELAY) {
             frame++;
-        } else if (saving) {
-            MinecraftClient.getInstance().options.hudHidden = hudHidden;
-            return savingDone;
+            return false;
         } else {
-            saving = true;
-
             ScreenshotRecorder.takeScreenshot(MinecraftClient.getInstance().getFramebuffer(), nativeImage -> {
-                savingDone = true;
-
                 Util.getIoWorkerExecutor().execute(() -> {
                     try (nativeImage) {
                         FramebufferWriter.write(nativeImage, file);
@@ -68,8 +61,9 @@ public class CaptureTask {
                     }
                 });
             });
-        }
 
-        return false;
+            MinecraftClient.getInstance().options.hudHidden = hudHidden;
+            return true;
+        }
     }
 }

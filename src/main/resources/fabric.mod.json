@@ -24,8 +24,8 @@
   },
   "recommends": {
     "fabric-resource-loader-v0": "*",
-    "modmenu": ">=13.0.0",
-    "cloth-config2": ">=17.0.0"
+    "modmenu": "*",
+    "cloth-config2": "*"
   },
   "authors": [
     "ramidzkh"

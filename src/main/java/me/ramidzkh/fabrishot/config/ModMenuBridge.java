@@ -32,7 +32,7 @@ public class ModMenuBridge implements ModMenuApi {
 
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        if (FabricLoader.getInstance().isModLoaded("cloth-config2")) {
+        if (FabricLoader.getInstance().isModLoaded("cloth-config")) {
             return new ClothConfigBridge();
         } else {
             return InstallClothConfigScreen::new;

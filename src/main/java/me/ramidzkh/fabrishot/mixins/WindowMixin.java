@@ -25,13 +25,11 @@
 package me.ramidzkh.fabrishot.mixins;
 
 import me.ramidzkh.fabrishot.Fabrishot;
-import me.ramidzkh.fabrishot.MinecraftInterface;
 import me.ramidzkh.fabrishot.config.Config;
 import net.minecraft.client.util.Window;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Window.class)
@@ -55,9 +53,4 @@ public class WindowMixin {
     //  @Inject(method = "getScaleFactor", at = @At("RETURN"), cancellable = true)
     //  private void scaleScale(CallbackInfoReturnable<Double> cir) {
     //  }
-
-    @Inject(method = {"onFramebufferSizeChanged", "updateFramebufferSize"}, at = @At("RETURN"))
-    private void onResize(CallbackInfo ci) {
-        MinecraftInterface.refresh();
-    }
 }

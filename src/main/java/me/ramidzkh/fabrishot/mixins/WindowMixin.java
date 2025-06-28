@@ -35,14 +35,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Window.class)
 public class WindowMixin {
 
-    @Inject(method = "getWidth", at = @At("RETURN"), cancellable = true)
+    @Inject(method = {"getWidth", "getScaledWidth"}, at = @At("RETURN"), cancellable = true)
     private void scaleWidth(CallbackInfoReturnable<Integer> cir) {
         if (Fabrishot.isInCapture()) {
             cir.setReturnValue(Config.CAPTURE_WIDTH);
         }
     }
 
-    @Inject(method = "getHeight", at = @At("RETURN"), cancellable = true)
+    @Inject(method = {"getHeight", "getScaledHeight"}, at = @At("RETURN"), cancellable = true)
     private void scaleHeight(CallbackInfoReturnable<Integer> cir) {
         if (Fabrishot.isInCapture()) {
             cir.setReturnValue(Config.CAPTURE_HEIGHT);

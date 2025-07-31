@@ -25,6 +25,7 @@
 package me.ramidzkh.fabrishot.capture;
 
 import me.ramidzkh.fabrishot.config.Config;
+import me.ramidzkh.fabrishot.event.FramebufferCaptureCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.ScreenshotRecorder;
 import net.minecraft.util.Util;
@@ -52,10 +53,14 @@ public class CaptureTask {
             frame++;
             return false;
         } else {
-            ScreenshotRecorder.takeScreenshot(MinecraftClient.getInstance().getFramebuffer(), nativeImage -> {
+            ScreenshotRecorder.takeScreenshot(MinecraftClient.getInstance().getFramebuffer(), image -> {
                 Util.getIoWorkerExecutor().execute(() -> {
-                    try (nativeImage) {
-                        FramebufferWriter.write(nativeImage, file);
+                    try (image) {
+                        FramebufferCaptureCallback.EVENT.invoker().onCapture(image);
+
+                        if (Config.SAVE_FILE) {
+                            FramebufferWriter.write(image, file);
+                        }
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }

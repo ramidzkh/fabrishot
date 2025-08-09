@@ -24,9 +24,9 @@
 
 package me.ramidzkh.fabrishot.mixins;
 
+import com.mojang.blaze3d.platform.Window;
 import me.ramidzkh.fabrishot.Fabrishot;
 import me.ramidzkh.fabrishot.config.Config;
-import net.minecraft.client.util.Window;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -35,14 +35,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Window.class)
 public class WindowMixin {
 
-    @Inject(method = {"getWidth", "getScaledWidth"}, at = @At("RETURN"), cancellable = true)
+    @Inject(method = {"getScreenWidth", "getGuiScaledWidth"}, at = @At("RETURN"), cancellable = true)
     private void scaleWidth(CallbackInfoReturnable<Integer> cir) {
         if (Fabrishot.isInCapture()) {
             cir.setReturnValue(Config.CAPTURE_WIDTH);
         }
     }
 
-    @Inject(method = {"getHeight", "getScaledHeight"}, at = @At("RETURN"), cancellable = true)
+    @Inject(method = {"getScreenHeight", "getGuiScaledHeight"}, at = @At("RETURN"), cancellable = true)
     private void scaleHeight(CallbackInfoReturnable<Integer> cir) {
         if (Fabrishot.isInCapture()) {
             cir.setReturnValue(Config.CAPTURE_HEIGHT);

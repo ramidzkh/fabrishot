@@ -23,14 +23,14 @@
 
 package me.ramidzkh.fabrishot.config;
 
-import me.ramidzkh.fabrishot.MinecraftInterface;
 import me.shedaniel.clothconfig2.api.AbstractConfigListEntry;
 import me.shedaniel.clothconfig2.gui.entries.IntegerListEntry;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.Element;
-import net.minecraft.client.gui.Selectable;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.text.Text;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.narration.NarratableEntry;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.Unit;
 
 import java.util.List;
@@ -40,16 +40,16 @@ import java.util.stream.IntStream;
 
 public class ScalingPresetEntry extends AbstractConfigListEntry<Unit> {
 
-    private final List<ButtonWidget> children;
+    private final List<Button> children;
     private final int width;
 
     public ScalingPresetEntry(int myWidth, IntegerListEntry widthConfig, IntegerListEntry heightConfig) {
-        super(Text.empty(), false);
+        super(Component.empty(), false);
 
         this.children = IntStream.rangeClosed(1, 4)
-                .mapToObj(scaleFactor -> (ButtonWidget) new ButtonWidget(0, 0, 0, 20, Text.literal(scaleFactor + "x"), button -> {
-                    int width = MinecraftInterface.getDisplayWidth() * scaleFactor;
-                    int height = MinecraftInterface.getDisplayHeight() * scaleFactor;
+                .mapToObj(scaleFactor -> (Button) new Button(0, 0, 0, 20, Component.literal(scaleFactor + "x"), button -> {
+                    int width = Minecraft.getInstance().getWindow().getWidth() * scaleFactor;
+                    int height = Minecraft.getInstance().getWindow().getHeight() * scaleFactor;
 
                     widthConfig.setValue(Integer.toString(width));
                     heightConfig.setValue(Integer.toString(height));
@@ -74,14 +74,14 @@ public class ScalingPresetEntry extends AbstractConfigListEntry<Unit> {
     }
 
     @Override
-    public void render(DrawContext graphics, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean isHovered, float delta) {
+    public void render(GuiGraphics graphics, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean isHovered, float delta) {
         super.render(graphics, index, y, x, entryWidth, entryHeight, mouseX, mouseY, isHovered, delta);
 
         int totalGap = (this.children.size() - 1) * 4;
         int childWidth = (this.width - totalGap) / this.children.size();
 
         for (int i = 0; i < children.size(); i++) {
-            ButtonWidget child = children.get(i);
+            Button child = children.get(i);
             child.active = this.isEditable();
             child.setX(x + entryWidth / 2 - this.width / 2 + i * (childWidth + 4));
             child.setY(y);
@@ -92,12 +92,12 @@ public class ScalingPresetEntry extends AbstractConfigListEntry<Unit> {
     }
 
     @Override
-    public List<? extends Element> children() {
+    public List<? extends GuiEventListener> children() {
         return children;
     }
 
     @Override
-    public List<? extends Selectable> narratables() {
+    public List<? extends NarratableEntry> narratables() {
         return children;
     }
 }

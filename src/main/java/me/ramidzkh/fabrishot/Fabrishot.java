@@ -24,17 +24,18 @@
 
 package me.ramidzkh.fabrishot;
 
+import com.mojang.blaze3d.platform.InputConstants;
+import com.mojang.blaze3d.platform.Window;
 import me.ramidzkh.fabrishot.capture.CaptureTask;
 import me.ramidzkh.fabrishot.config.Config;
 import me.ramidzkh.fabrishot.event.ScreenshotSaveCallback;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
-import net.minecraft.text.ClickEvent;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Util;
+import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.ClickEvent;
+import net.minecraft.network.chat.Component;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.IOException;
@@ -44,17 +45,17 @@ import java.nio.file.Path;
 
 public class Fabrishot {
 
-    public static final KeyBinding SCREENSHOT_BINDING = new KeyBinding(
+    public static final KeyMapping SCREENSHOT_BINDING = new KeyMapping(
             "key.fabrishot.screenshot",
-            InputUtil.Type.KEYSYM,
+            InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_F9,
             "key.categories.misc");
 
     private static CaptureTask task;
 
     private static void printFileLink(Path path) {
-        Text text = Text.literal(path.toFile().getName()).formatted(Formatting.UNDERLINE).styled(style -> style.withClickEvent(new ClickEvent.OpenFile(path)));
-        MinecraftClient.getInstance().execute(() -> MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(Text.translatable("screenshot.success", text)));
+        Component text = Component.literal(path.toFile().getName()).withStyle(ChatFormatting.UNDERLINE).withStyle(style -> style.withClickEvent(new ClickEvent.OpenFile(path)));
+        Minecraft.getInstance().execute(() -> Minecraft.getInstance().gui.getChat().addMessage(Component.translatable("screenshot.success", text)));
     }
 
     public static void initialize() {
@@ -64,20 +65,28 @@ public class Fabrishot {
 
     public static void startCapture() {
         if (task == null) {
-            task = new CaptureTask(getScreenshotFile(MinecraftClient.getInstance()));
-            MinecraftInterface.refresh();
+            task = new CaptureTask(getScreenshotFile(Minecraft.getInstance()));
+            refresh();
         }
     }
 
     public static void onRenderPreOrPost() {
         if (task != null && task.onRenderTick()) {
             task = null;
-            MinecraftInterface.refresh();
+            refresh();
         }
     }
 
-    private static Path getScreenshotFile(MinecraftClient client) {
-        Path dir = client.runDirectory.toPath().resolve("screenshots");
+    private static void refresh() {
+        var framebuffer = Minecraft.getInstance().getMainRenderTarget();
+        if (framebuffer == null) return;
+
+        Window window = Minecraft.getInstance().getWindow();
+        framebuffer.resize(window.getScreenWidth(), window.getScreenHeight());
+    }
+
+    private static Path getScreenshotFile(Minecraft client) {
+        Path dir = client.gameDirectory.toPath().resolve("screenshots");
 
         try {
             if (!Files.exists(dir)) {
@@ -89,15 +98,15 @@ public class Fabrishot {
 
         String world = null;
 
-        if (client.getServer() != null) {
-            world = client.getServer().getSaveProperties().getLevelName();
-        } else if (client.getCurrentServerEntry() != null) {
-            world = client.getCurrentServerEntry().name;
+        if (client.getSingleplayerServer() != null) {
+            world = client.getSingleplayerServer().getWorldData().getLevelName();
+        } else if (client.getCurrentServer() != null) {
+            world = client.getCurrentServer().name;
         }
 
         Path file;
         String prefix = Config.CUSTOM_FILE_NAME
-                .replace("%time%", Util.getFormattedCurrentTime())
+                .replace("%time%", Util.getFilenameFormattedDateTime())
                 .replace("%world%", world != null ? world : "no_world");
 
         // loop though suffixes while the file exists

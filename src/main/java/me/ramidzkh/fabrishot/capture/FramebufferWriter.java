@@ -24,9 +24,9 @@
 
 package me.ramidzkh.fabrishot.capture;
 
+import com.mojang.blaze3d.platform.NativeImage;
 import me.ramidzkh.fabrishot.config.Config;
 import me.ramidzkh.fabrishot.event.ScreenshotSaveCallback;
-import net.minecraft.client.texture.NativeImage;
 import org.lwjgl.stb.STBIWriteCallback;
 import org.lwjgl.stb.STBImageWrite;
 
@@ -44,10 +44,10 @@ public class FramebufferWriter {
         try (FileChannel fc = FileChannel.open(file, StandardOpenOption.CREATE, StandardOpenOption.WRITE);
              WriteCallback callback = new WriteCallback(fc)) {
             switch (Config.CAPTURE_FILE_FORMAT) {
-                case PNG -> STBImageWrite.nstbi_write_png_to_func(callback.address(), 0L, image.getWidth(), image.getHeight(), image.getFormat().getChannelCount(), image.imageId(), 0);
-                case JPG -> STBImageWrite.nstbi_write_jpg_to_func(callback.address(), 0L, image.getWidth(), image.getHeight(), image.getFormat().getChannelCount(), image.imageId(), 90);
-                case TGA -> STBImageWrite.nstbi_write_tga_to_func(callback.address(), 0L, image.getWidth(), image.getHeight(), image.getFormat().getChannelCount(), image.imageId());
-                case BMP -> STBImageWrite.nstbi_write_bmp_to_func(callback.address(), 0L, image.getWidth(), image.getHeight(), image.getFormat().getChannelCount(), image.imageId());
+                case PNG -> STBImageWrite.nstbi_write_png_to_func(callback.address(), 0L, image.getWidth(), image.getHeight(), image.format().components(), image.getPointer(), 0);
+                case JPG -> STBImageWrite.nstbi_write_jpg_to_func(callback.address(), 0L, image.getWidth(), image.getHeight(), image.format().components(), image.getPointer(), 90);
+                case TGA -> STBImageWrite.nstbi_write_tga_to_func(callback.address(), 0L, image.getWidth(), image.getHeight(), image.format().components(), image.getPointer());
+                case BMP -> STBImageWrite.nstbi_write_bmp_to_func(callback.address(), 0L, image.getWidth(), image.getHeight(), image.format().components(), image.getPointer());
             }
 
             if (callback.exception != null) {

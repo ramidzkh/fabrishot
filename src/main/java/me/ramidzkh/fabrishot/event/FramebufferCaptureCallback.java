@@ -24,9 +24,9 @@
 
 package me.ramidzkh.fabrishot.event;
 
+import com.mojang.blaze3d.platform.NativeImage;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
-import net.minecraft.client.texture.NativeImage;
 
 /**
  * Immediately after a screenshot is captured, but before it is saved

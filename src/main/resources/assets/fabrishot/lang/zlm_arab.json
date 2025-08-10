@@ -1,0 +1,16 @@
+{
+  "fabrishot.config.title": "Fabrishot",
+  "fabrishot.config.category": "کونفيݢوراسي تڠکڤن لاير",
+  "fabrishot.config.custom_file_name": "ݢوناکن فورمت نام فاٴيل يڠ بربيذا",
+  "fabrishot.config.custom_file_name.tooltip": "ݢوناکن %time% اونتوق ماس⹁\n %world% اونتوق نام دنيا اتاو ڤلاين",
+  "fabrishot.config.override_screenshot_key": "ݢنتيکن تڠکڤن لاير بياسا دڠن Fabrishot",
+  "fabrishot.config.hide_hud": "سمبوڽيکن HUD سچارا اٴوتوماتيک",
+  "fabrishot.config.save_file": "سيمڤن فاٴيل تڠکڤن لاير",
+  "fabrishot.config.disable_gui_scaling": "ڽهداياکن ڤنسکالاٴن GUI",
+  "fabrishot.config.width": "لبر تڠکڤن لاير",
+  "fabrishot.config.height": "تيڠݢي تڠکڤن لاير",
+  "fabrishot.config.delay": "کليواتن تڠکڤن",
+  "fabrishot.config.delay.tooltip": "بيلڠن بيڠکاي اونتوق منوڠݢو سلڤس ساٴيز سمولا. اوبه اونتوق ڤنددهن يڠ لبيه باٴيق دڠن ڤمبايڠ",
+  "fabrishot.config.file_format": "فورمت فاٴيل",
+  "key.fabrishot.screenshot": "امبيل تڠکڤن لاير بسر"
+}

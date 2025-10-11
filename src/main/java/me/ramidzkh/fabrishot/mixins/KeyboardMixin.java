@@ -27,6 +27,7 @@ package me.ramidzkh.fabrishot.mixins;
 import me.ramidzkh.fabrishot.Fabrishot;
 import me.ramidzkh.fabrishot.config.Config;
 import net.minecraft.client.KeyboardHandler;
+import net.minecraft.client.input.KeyEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -36,9 +37,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class KeyboardMixin {
 
     @Inject(method = "keyPress", at = @At(value = "FIELD", target = "Lnet/minecraft/client/Options;keyScreenshot:Lnet/minecraft/client/KeyMapping;"))
-    private void preScreenshot(long window, int key, int scancode, int i, int j, CallbackInfo callbackInfo) {
+    private void preScreenshot(long window, int i, KeyEvent keyEvent, CallbackInfo callbackInfo) {
         // Injecting here allows us to work inside other menus
-        if (Fabrishot.SCREENSHOT_BINDING.matches(key, scancode)) {
+        if (Fabrishot.SCREENSHOT_BINDING.matches(keyEvent)) {
             Fabrishot.startCapture();
         }
     }

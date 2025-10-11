@@ -49,7 +49,7 @@ public class Fabrishot {
             "key.fabrishot.screenshot",
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_F9,
-            "key.categories.misc");
+            KeyMapping.Category.MISC);
 
     private static CaptureTask task;
 

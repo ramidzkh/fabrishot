@@ -47,7 +47,7 @@ public class ScalingPresetEntry extends AbstractConfigListEntry<Unit> {
         super(Component.empty(), false);
 
         this.children = IntStream.rangeClosed(1, 4)
-                .mapToObj(scaleFactor -> (Button) new Button(0, 0, 0, 20, Component.literal(scaleFactor + "x"), button -> {
+                .mapToObj(scaleFactor -> (Button) new Button.Plain(0, 0, 0, 20, Component.literal(scaleFactor + "x"), button -> {
                     int width = Minecraft.getInstance().getWindow().getWidth() * scaleFactor;
                     int height = Minecraft.getInstance().getWindow().getHeight() * scaleFactor;
 

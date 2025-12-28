@@ -1,13 +1,13 @@
 plugins {
-    id("fabric-loom") version "1.11-SNAPSHOT"
+    id("fabric-loom") version "1.14-SNAPSHOT"
     id("com.matthewprenger.cursegradle") version "1.4.0"
-    id("com.modrinth.minotaur") version "2.8.7"
+    id("com.modrinth.minotaur") version "2.8.10"
 }
 
 group = "me.ramidzkh"
 version = System.getenv("FABRISHOT_VERSION") ?: "0.0.0"
 
-String minecraft_version = "1.21.9"
+String minecraft_version = "1.21.11"
 
 repositories {
     maven {
@@ -32,11 +32,11 @@ repositories {
 dependencies {
     minecraft("net.minecraft:minecraft:${minecraft_version}")
     mappings(loom.officialMojangMappings())
-    modImplementation("net.fabricmc:fabric-loader:0.17.2")
+    modImplementation("net.fabricmc:fabric-loader:0.18.4")
 
-    modImplementation("net.fabricmc.fabric-api:fabric-api:0.134.0+1.21.9")
-    modImplementation("com.terraformersmc:modmenu:16.0.0-rc.1")
-    modImplementation("me.shedaniel.cloth:cloth-config-fabric:19.0.147")
+    modImplementation("net.fabricmc.fabric-api:fabric-api:0.140.2+1.21.11")
+    modImplementation("com.terraformersmc:modmenu:17.0.0-beta.1")
+    modImplementation("me.shedaniel.cloth:cloth-config-fabric:21.11.153")
 }
 
 java {

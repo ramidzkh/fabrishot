@@ -1,7 +1,6 @@
 plugins {
     id("net.fabricmc.fabric-loom") version "1.15-SNAPSHOT"
-    id("com.matthewprenger.cursegradle") version "1.4.0"
-    id("com.modrinth.minotaur") version "2.8.10"
+    id("me.modmuss50.mod-publish-plugin") version "1.1.0"
 }
 
 group = "me.ramidzkh"
@@ -60,66 +59,39 @@ processResources {
 }
 
 ////////////////
-// CurseForge
-System.getenv("CURSEFORGE")?.with { String key ->
-    curseforge {
-        apiKey = key
+// mod-publish-plugin
+publishMods {
+    displayName = project.version
+    changelog = "View changelog at [the release page](https://github.com/ramidzkh/fabrishot/releases/tag/${project.version})"
 
-        project {
-            id = "404870"
-            changelogType = "markdown"
-            changelog = "View changelog at [the release page](https://github.com/ramidzkh/fabrishot/releases/tag/${version})"
-
-            if (version.contains("alpha")) {
-                releaseType = "alpha"
-            } else if (version.contains("beta")) {
-                releaseType = "beta"
-            } else {
-                releaseType = "release"
-            }
-
-            addGameVersion(minecraft_version)
-            addGameVersion("Fabric")
-
-            mainArtifact(jar) {
-                displayName = "${project.version}"
-
-                relations {
-                    requiredDependency("fabric-api")
-                    optionalDependency("modmenu")
-                    optionalDependency("cloth-config")
-                }
-            }
-        }
-    }
-}
-
-////////////////
-// Modrinth
-modrinth {
-    token.set(System.getenv("MODRINTH"))
-    projectId.set("fabrishot")
-    changelog.set("View changelog at [the release page](https://github.com/ramidzkh/fabrishot/releases/tag/${version})")
-    versionNumber.set(project.version)
-
-    if (version.contains("alpha")) {
-        versionType.set("alpha")
-    } else if (version.contains("beta")) {
-        versionType.set("beta")
+    if (project.version.contains("alpha")) {
+        type = ALPHA
+    } else if (project.version.contains("beta")) {
+        type = BETA
     } else {
-        versionType.set("release")
+        type = STABLE
     }
 
-    uploadFile.set(jar)
-    gameVersions.addAll([minecraft_version])
+    file = jar.archiveFile
+    modLoaders.add("fabric")
 
-    dependencies {
-        required.project("fabric-api")
-        optional.project("modmenu")
-        optional.project("cloth-config")
+    curseforge {
+        accessToken = providers.environmentVariable("CURSEFORGE")
+        projectId = "404870"
+        minecraftVersions.add(minecraft_version)
+
+        requires("fabric-api")
+        optional("modmenu")
+        optional("cloth-config")
     }
-}
 
-tasks.modrinth.onlyIf {
-    System.getenv("MODRINTH")
+    modrinth {
+        accessToken = providers.environmentVariable("MODRINTH")
+        projectId = "3qsfQtE9"
+        minecraftVersions.add(minecraft_version)
+
+        requires { slug = "fabric-api" }
+        optional { slug = "modmenu" }
+        optional { slug = "cloth-config" }
+    }
 }

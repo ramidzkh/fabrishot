@@ -6,7 +6,8 @@
   "mixins": [
     "KeyboardMixin",
     "MinecraftClientMixin",
-    "WindowMixin"
+    "WindowMixin",
+    "compat.renderscale.RenderscaleCommonClassMixin"
   ],
   "injectors": {
     "defaultRequire": 1

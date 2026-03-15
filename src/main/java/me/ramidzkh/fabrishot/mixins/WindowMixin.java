@@ -24,29 +24,24 @@
 
 package me.ramidzkh.fabrishot.mixins;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.mojang.blaze3d.platform.Window;
 import me.ramidzkh.fabrishot.Fabrishot;
 import me.ramidzkh.fabrishot.config.Config;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Window.class)
 public class WindowMixin {
 
-    @Inject(method = {"getScreenWidth", "getGuiScaledWidth"}, at = @At("RETURN"), cancellable = true)
-    private void scaleWidth(CallbackInfoReturnable<Integer> cir) {
-        if (Fabrishot.isInCapture()) {
-            cir.setReturnValue(Config.CAPTURE_WIDTH);
-        }
+    @ModifyReturnValue(method = {"getScreenWidth", "getGuiScaledWidth"}, at = @At("RETURN"))
+    private int scaleWidth(int original) {
+        return Fabrishot.isInCapture() ? Config.CAPTURE_WIDTH : original;
     }
 
-    @Inject(method = {"getScreenHeight", "getGuiScaledHeight"}, at = @At("RETURN"), cancellable = true)
-    private void scaleHeight(CallbackInfoReturnable<Integer> cir) {
-        if (Fabrishot.isInCapture()) {
-            cir.setReturnValue(Config.CAPTURE_HEIGHT);
-        }
+    @ModifyReturnValue(method = {"getScreenHeight", "getGuiScaledHeight"}, at = @At("RETURN"))
+    private int scaleHeight(int original) {
+        return Fabrishot.isInCapture() ? Config.CAPTURE_HEIGHT : original;
     }
 
     // todo: fix gui scaling (or is that needed anymore?)

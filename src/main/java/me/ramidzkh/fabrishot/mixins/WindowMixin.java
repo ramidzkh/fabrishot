@@ -31,7 +31,7 @@ import me.ramidzkh.fabrishot.config.Config;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(Window.class)
+@Mixin(value = Window.class, priority = 2000)
 public class WindowMixin {
 
     @ModifyReturnValue(method = {"getScreenWidth", "getGuiScaledWidth"}, at = @At("RETURN"))

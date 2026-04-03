@@ -29,7 +29,7 @@ import com.mojang.blaze3d.platform.Window;
 import me.ramidzkh.fabrishot.capture.CaptureTask;
 import me.ramidzkh.fabrishot.config.Config;
 import me.ramidzkh.fabrishot.event.ScreenshotSaveCallback;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.util.Util;
 import net.minecraft.client.KeyMapping;
@@ -55,11 +55,10 @@ public class Fabrishot {
 
     private static void printFileLink(Path path) {
         Component text = Component.literal(path.toFile().getName()).withStyle(ChatFormatting.UNDERLINE).withStyle(style -> style.withClickEvent(new ClickEvent.OpenFile(path)));
-        Minecraft.getInstance().execute(() -> Minecraft.getInstance().gui.getChat().addMessage(Component.translatable("screenshot.success", text)));
-    }
+        Minecraft.getInstance().execute(() -> Minecraft.getInstance().gui.getChat().addClientSystemMessage(Component.translatable("screenshot.success", text)));    }
 
     public static void initialize() {
-        KeyBindingHelper.registerKeyBinding(SCREENSHOT_BINDING);
+        KeyMappingHelper.registerKeyMapping(SCREENSHOT_BINDING);
         ScreenshotSaveCallback.EVENT.register(Fabrishot::printFileLink);
     }
 

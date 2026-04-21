@@ -25,7 +25,7 @@
 package me.ramidzkh.fabrishot.config;
 
 import net.minecraft.client.GameNarrator;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
@@ -50,12 +50,12 @@ public class InstallClothConfigScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics drawContext, int mouseX, int mouseY, float delta) {
-        super.render(drawContext, mouseX, mouseY, delta);
+    public void extractRenderState(GuiGraphicsExtractor drawContext, int mouseX, int mouseY, float delta) {
+        super.extractRenderState(drawContext, mouseX, mouseY, delta);
 
         int textWidth = minecraft.font.width(INSTALL_CLOTH_CONFIG);
-        drawContext.drawString(minecraft.font, INSTALL_CLOTH_CONFIG, (width - textWidth) / 2, height / 3, 0xFF0000);
+        drawContext.text(minecraft.font, INSTALL_CLOTH_CONFIG, (width - textWidth) / 2, height / 3, 0xFF0000);
 
-        super.render(drawContext, mouseX, mouseY, delta);
+        super.extractRenderState(drawContext, mouseX, mouseY, delta);
     }
 }

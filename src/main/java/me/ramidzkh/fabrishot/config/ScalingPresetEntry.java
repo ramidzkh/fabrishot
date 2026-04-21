@@ -26,7 +26,7 @@ package me.ramidzkh.fabrishot.config;
 import me.shedaniel.clothconfig2.api.AbstractConfigListEntry;
 import me.shedaniel.clothconfig2.gui.entries.IntegerListEntry;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
@@ -74,8 +74,8 @@ public class ScalingPresetEntry extends AbstractConfigListEntry<Unit> {
     }
 
     @Override
-    public void render(GuiGraphics graphics, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean isHovered, float delta) {
-        super.render(graphics, index, y, x, entryWidth, entryHeight, mouseX, mouseY, isHovered, delta);
+    public void extractRenderState(GuiGraphicsExtractor graphics, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean isHovered, float delta) {
+        super.extractRenderState(graphics, index, y, x, entryWidth, entryHeight, mouseX, mouseY, isHovered, delta);
 
         int totalGap = (this.children.size() - 1) * 4;
         int childWidth = (this.width - totalGap) / this.children.size();
@@ -87,7 +87,7 @@ public class ScalingPresetEntry extends AbstractConfigListEntry<Unit> {
             child.setY(y);
             child.setWidth(childWidth - 2);
 
-            child.render(graphics, mouseX, mouseY, delta);
+            child.extractRenderState(graphics, mouseX, mouseY, delta);
         }
     }
 

@@ -19,11 +19,9 @@
   "description": "Take high resolution screenshots because why not",
   "depends": {
     "minecraft": ">=${minecraft_version}",
-    "fabric-lifecycle-events-v1": "*",
-    "fabric-key-mapping-api-v1": "*"
+    "fabric-api": "*"
   },
   "recommends": {
-    "fabric-resource-loader-v0": "*",
     "modmenu": "*",
     "cloth-config2": "*"
   },

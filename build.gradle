@@ -76,7 +76,7 @@ publishMods {
     modLoaders.add("fabric")
 
     curseforge {
-        accessToken = providers.environmentVariable("CURSEFORGE")
+        accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
         projectId = "404870"
         minecraftVersions.add(minecraft_version)
 
@@ -86,7 +86,7 @@ publishMods {
     }
 
     modrinth {
-        accessToken = providers.environmentVariable("MODRINTH")
+        accessToken = providers.environmentVariable("MODRINTH_API_KEY")
         projectId = "3qsfQtE9"
         minecraftVersions.add(minecraft_version)
 

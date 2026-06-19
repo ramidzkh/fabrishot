@@ -62,7 +62,7 @@ public class Fabrishot {
         minecraft.execute(() -> {
             Component message = Component.translatable("screenshot.success", fileText);
 
-            minecraft.gui.getChat().addClientSystemMessage(message);
+            minecraft.gui.hud.getChat().addClientSystemMessage(message);
             minecraft.getNarrator().saySystemQueued(message);
         });
     }
@@ -73,25 +73,27 @@ public class Fabrishot {
     }
 
     public static void startCapture() {
+        Minecraft minecraft = Minecraft.getInstance();
+
         if (task == null) {
-            task = new CaptureTask(getScreenshotFile(Minecraft.getInstance()));
+            task = new CaptureTask(minecraft, getScreenshotFile(minecraft));
+            task.setResolution(Config.CAPTURE_WIDTH, Config.CAPTURE_HEIGHT);
             refresh();
         }
     }
 
     public static void onRenderPreOrPost() {
         if (task != null && task.onRenderTick()) {
+            task.restoreResolution();
             task = null;
             refresh();
         }
     }
 
     private static void refresh() {
-        var framebuffer = Minecraft.getInstance().getMainRenderTarget();
-        if (framebuffer == null) return;
-
-        Window window = Minecraft.getInstance().getWindow();
-        framebuffer.resize(window.getScreenWidth(), window.getScreenHeight());
+        //NOTE: Since 26.2, framebuffer resizing is handled during frame extraction.
+        //      All that needs to be done now is to refresh the GUI scaled width and height.
+        Minecraft.getInstance().resizeGui();
     }
 
     private static Path getScreenshotFile(Minecraft client) {

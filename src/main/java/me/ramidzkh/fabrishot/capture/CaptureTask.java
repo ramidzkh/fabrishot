@@ -24,6 +24,7 @@
 
 package me.ramidzkh.fabrishot.capture;
 
+import com.mojang.blaze3d.platform.Window;
 import me.ramidzkh.fabrishot.config.Config;
 import me.ramidzkh.fabrishot.event.FramebufferCaptureCallback;
 import net.minecraft.util.Util;
@@ -34,26 +35,53 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 public class CaptureTask {
-
+    private final Minecraft minecraft;
     private final Path file;
     private boolean hudHidden;
     private int frame;
 
+    private int prevWidth, prevHeight;
+
     public CaptureTask(Path file) {
+        this(Minecraft.getInstance(), file);
+    }
+
+    public CaptureTask(Minecraft minecraft, Path file) {
+        this.minecraft = minecraft;
         this.file = file;
+    }
+
+    public void restoreResolution() {
+        Window window = minecraft.getWindow();
+
+        window.setWidth(prevWidth);
+        window.setHeight(prevHeight);
+    }
+
+    public void setResolution(int width, int height) {
+        Window window = minecraft.getWindow();
+
+        prevWidth = window.getWidth();
+        prevHeight = window.getHeight();
+
+        window.setWidth(width);
+        window.setHeight(height);
     }
 
     public boolean onRenderTick() {
         if (frame == 0) {
-            hudHidden = Minecraft.getInstance().options.hideGui;
-            Minecraft.getInstance().options.hideGui |= Config.HIDE_HUD;
+            hudHidden = minecraft.gui.hud.isHidden();
+            if (!hudHidden && Config.HIDE_HUD) {
+                minecraft.gui.hud.toggle();
+            }
+
             frame++;
             return false;
         } else if (frame < Config.CAPTURE_DELAY) {
             frame++;
             return false;
         } else {
-            Screenshot.takeScreenshot(Minecraft.getInstance().getMainRenderTarget(), image -> {
+            Screenshot.takeScreenshot(minecraft.gameRenderer.mainRenderTarget(), image -> {
                 Util.ioPool().execute(() -> {
                     try (image) {
                         FramebufferCaptureCallback.EVENT.invoker().onCapture(image);
@@ -67,7 +95,9 @@ public class CaptureTask {
                 });
             });
 
-            Minecraft.getInstance().options.hideGui = hudHidden;
+            if (!hudHidden && Config.HIDE_HUD) {
+                minecraft.gui.hud.toggle();
+            }
             return true;
         }
     }

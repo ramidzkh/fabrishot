@@ -25,7 +25,6 @@
 package me.ramidzkh.fabrishot;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import com.mojang.blaze3d.platform.Window;
 import me.ramidzkh.fabrishot.capture.CaptureTask;
 import me.ramidzkh.fabrishot.config.Config;
 import me.ramidzkh.fabrishot.event.ScreenshotSaveCallback;
@@ -36,7 +35,6 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
-import org.lwjgl.glfw.GLFW;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -47,8 +45,8 @@ public class Fabrishot {
 
     public static final KeyMapping SCREENSHOT_BINDING = new KeyMapping(
             "key.fabrishot.screenshot",
-            InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_F9,
+            InputConstants.Type.KEYBOARD,
+            InputConstants.KEY_F9,
             KeyMapping.Category.MISC);
 
     private static CaptureTask task;
@@ -62,7 +60,7 @@ public class Fabrishot {
         minecraft.execute(() -> {
             Component message = Component.translatable("screenshot.success", fileText);
 
-            minecraft.gui.getChat().addClientSystemMessage(message);
+            minecraft.gui.hud.getChat().addClientSystemMessage(message);
             minecraft.getNarrator().saySystemQueued(message);
         });
     }
@@ -73,25 +71,25 @@ public class Fabrishot {
     }
 
     public static void startCapture() {
+        Minecraft minecraft = Minecraft.getInstance();
+
         if (task == null) {
-            task = new CaptureTask(getScreenshotFile(Minecraft.getInstance()));
+            task = new CaptureTask(minecraft, getScreenshotFile(minecraft));
+            task.setResolution(Config.CAPTURE_WIDTH, Config.CAPTURE_HEIGHT);
             refresh();
         }
     }
 
     public static void onRenderPreOrPost() {
         if (task != null && task.onRenderTick()) {
+            task.restoreResolution();
             task = null;
             refresh();
         }
     }
 
     private static void refresh() {
-        var framebuffer = Minecraft.getInstance().getMainRenderTarget();
-        if (framebuffer == null) return;
-
-        Window window = Minecraft.getInstance().getWindow();
-        framebuffer.resize(window.getScreenWidth(), window.getScreenHeight());
+        Minecraft.getInstance().resizeGui();
     }
 
     private static Path getScreenshotFile(Minecraft client) {

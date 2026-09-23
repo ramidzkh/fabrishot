@@ -3,10 +3,8 @@
   "minVersion": "0.8",
   "package": "me.ramidzkh.fabrishot.mixins",
   "mixins": [
-    "KeyboardMixin",
     "MinecraftClientMixin",
-    "RenderscaleCommonClassMixin",
-    "WindowMixin"
+    "RenderscaleCommonClassMixin"
   ],
   "injectors": {
     "defaultRequire": 1

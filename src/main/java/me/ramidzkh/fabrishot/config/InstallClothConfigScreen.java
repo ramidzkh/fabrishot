@@ -43,7 +43,7 @@ public class InstallClothConfigScreen extends Screen {
 
     @Override
     protected void init() {
-        addRenderableWidget(Button.builder(CommonComponents.GUI_OK, buttonWidget -> minecraft.setScreen(parent))
+        addRenderableWidget(Button.builder(CommonComponents.GUI_OK, buttonWidget -> minecraft.gui.setScreen(parent))
                 .pos(width / 2 - 100, height - 52)
                 .size(200, 20)
                 .build());

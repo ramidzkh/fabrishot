@@ -25,18 +25,16 @@
 package me.ramidzkh.fabrishot;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import com.mojang.blaze3d.platform.Window;
 import me.ramidzkh.fabrishot.capture.CaptureTask;
 import me.ramidzkh.fabrishot.config.Config;
 import me.ramidzkh.fabrishot.event.ScreenshotSaveCallback;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.minecraft.ChatFormatting;
-import net.minecraft.util.Util;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
-import org.lwjgl.glfw.GLFW;
+import net.minecraft.util.Util;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -47,8 +45,8 @@ public class Fabrishot {
 
     public static final KeyMapping SCREENSHOT_BINDING = new KeyMapping(
             "key.fabrishot.screenshot",
-            InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_F9,
+            InputConstants.Type.KEYBOARD,
+            InputConstants.KEY_F9,
             KeyMapping.Category.MISC);
 
     private static CaptureTask task;

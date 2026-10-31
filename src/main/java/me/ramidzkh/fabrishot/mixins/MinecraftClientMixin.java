@@ -24,12 +24,16 @@
 
 package me.ramidzkh.fabrishot.mixins;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import me.ramidzkh.fabrishot.Fabrishot;
+import me.ramidzkh.fabrishot.config.Config;
 import net.minecraft.client.Minecraft;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Minecraft.class)
 public class MinecraftClientMixin {
@@ -37,5 +41,21 @@ public class MinecraftClientMixin {
     @Inject(method = "renderFrame", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/GameRenderer;render(Lnet/minecraft/client/DeltaTracker;Z)V", shift = At.Shift.AFTER))
     private void postRender(CallbackInfo callbackInfo) {
         Fabrishot.onRenderPreOrPost();
+    }
+
+    @Inject(method = "handleGlobalKeyPress", at = @At(value = "FIELD", target = "Lnet/minecraft/client/Options;keyScreenshot:Lnet/minecraft/client/KeyMapping;", opcode = Opcodes.GETFIELD))
+    private void preScreenshot(InputConstants.Key key, boolean controlDown, CallbackInfoReturnable<Boolean> cir) {
+        // Injecting here allows us to work inside other menus
+        if (Fabrishot.SCREENSHOT_BINDING.matches(key)) {
+            Fabrishot.startCapture();
+        }
+    }
+
+    @Inject(method = "handleGlobalKeyPress", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Screenshot;grab(Lnet/minecraft/client/Minecraft;Z)V"), cancellable = true)
+    private void onScreenshot(InputConstants.Key key, boolean controlDown, CallbackInfoReturnable<Boolean> cir) {
+        if (Config.OVERRIDE_SCREENSHOT_KEY) {
+            Fabrishot.startCapture();
+            cir.cancel();
+        }
     }
 }
